@@ -1,4 +1,5 @@
 <!-- resources/views/admin/products/edit.blade.php -->
+
 @extends('layouts.admin')
 
 @section('content')
@@ -14,37 +15,40 @@
         </div>
 
         <div class="mb-4">
-            <label for="purchase_price" class="block">Harga Produk</label>
-            <input type="number" id="purchase_price" name="purchase_price" class="w-full p-2 border" value="{{ $product->purchase_price }}" required>
+            <label for="description" class="block">Deskripsi Produk</label>
+            <textarea id="description" name="description" class="w-full p-2 border">{{ $product->description }}</textarea>
         </div>
 
         <div class="mb-4">
-            <label for="selling_price" class="block">Harga Jual</label>
-            <input type="number" id="selling_price" name="selling_price" class="w-full p-2 border" value="{{ $product->selling_price }}" required>
+            <label for="purchase_price" class="block">Harga Produk</label>
+            <input type="number" id="purchase_price" name="purchase_price" class="w-full p-2 border"
+                value="{{ $product->purchase_price }}" required>
         </div>
 
-        <!-- Dropdown Kategori Produk -->
+        <div class="mb-4">
+            <label for="sale_price" class="block">Harga Jual</label>
+            <input type="number" id="sale_price" name="sale_price" class="w-full p-2 border"
+                value="{{ $product->sale_price }}" required>
+        </div>
+
         <div class="mb-4">
             <label for="category_id" class="block">Kategori Produk</label>
             <select id="category_id" name="category_id" class="w-full p-2 border" required>
                 <option value="">Pilih Kategori</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}" 
-                        @if($product->category_id == $category->id) selected @endif>
+                    <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>
                         {{ $category->name }}
                     </option>
                 @endforeach
             </select>
         </div>
 
-        <!-- Dropdown Supplier Produk -->
         <div class="mb-4">
             <label for="supplier_id" class="block">Supplier Produk</label>
             <select id="supplier_id" name="supplier_id" class="w-full p-2 border" required>
                 <option value="">Pilih Supplier</option>
                 @foreach($suppliers as $supplier)
-                    <option value="{{ $supplier->id }}" 
-                        @if($product->supplier_id == $supplier->id) selected @endif>
+                    <option value="{{ $supplier->id }}" @if($product->supplier_id == $supplier->id) selected @endif>
                         {{ $supplier->name }}
                     </option>
                 @endforeach
@@ -53,4 +57,6 @@
 
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Perbarui Produk</button>
     </form>
+
+
 @endsection

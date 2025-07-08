@@ -15,7 +15,7 @@
 
     <div class="mb-4">
         <strong>Harga Jual:</strong>
-        <p>Rp {{ number_format($product->selling_price, 0, ',', '.') }}</p>
+        <p>Rp {{ number_format($product->sale_price, 0, ',', '.') }}</p>
     </div>
 
     <!-- Menampilkan Kategori Produk -->

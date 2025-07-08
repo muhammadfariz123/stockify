@@ -5,6 +5,8 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\CategoryController; // Pastikan ini sudah diimport
 use App\Http\Controllers\SupplierController; // Pastikan ini sudah diimport
+use App\Http\Controllers\ProductController;  // Import ProductController
+use App\Http\Controllers\ReportController;  // Import ReportController
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
@@ -64,16 +66,34 @@ Route::prefix('admin')
 
 // ========== MANAGER GUDANG ==========
 
+Route::middleware(['role:Manajer Gudang'])->group(function () {
+    Route::get('/manager/dashboard', [ManagerController::class, 'index'])->name('manager.dashboard');
+    Route::get('/manager/stock', [ManagerController::class, 'showstock'])->name('manager.stock.index');
+    Route::get('/manager/products', [ManagerController::class, 'products'])->name('manager.products.index');
+    Route::post('/manager/products', [ManagerController::class, 'addProduct'])->name('manager.products.add');
+    Route::get('/manager/suppliers', [ManagerController::class, 'suppliers'])->name('manager.suppliers.index');
+    Route::get('/manager/reports', [ManagerController::class, 'reports'])->name('manager.reports.index');
+});
+
+// Menambahkan Rute untuk Produk
 Route::prefix('manager')
-    ->name('manager.')
     ->middleware(['auth', 'role:Manajer Gudang'])
     ->group(function () {
-        Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('dashboard');
-        Route::resource('products', ManagerController::class);
-        Route::resource('stock', ManagerController::class);
+        Route::get('products', [ProductController::class, 'index'])->name('manager.products.index');
+        Route::get('products/create', [ProductController::class, 'create'])->name('manager.products.create');
+        Route::post('products', [ProductController::class, 'store'])->name('manager.products.store');
+    });
 
-        // Laporan (Route yang hilang)
-        Route::get('reports', [ManagerController::class, 'reports'])->name('reports.index'); // Menambahkan route laporan
+// ========== RUTE LAPORAN ==========
+
+Route::prefix('manager')
+    ->middleware(['auth', 'role:Manajer Gudang'])
+    ->group(function () {
+        // Rute untuk laporan stok
+        Route::get('reports/stock', [ReportController::class, 'stockReport'])->name('manager.reports.stock');
+        
+        // Rute untuk laporan transaksi
+        Route::get('reports/transactions', [ReportController::class, 'transactionReport'])->name('manager.reports.transactions');
     });
 
 // ========== STAFF GUDANG ==========

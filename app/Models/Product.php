@@ -9,7 +9,16 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'purchase_price', 'selling_price', 'category_id', 'supplier_id'];
+    protected $fillable = [
+        'name',
+        'description',
+        'purchase_price',
+        'sale_price',
+        'stock',
+        'image',
+        'category_id',
+        'supplier_id',
+    ];
 
     // Aksesornya untuk harga beli (dalam rupiah)
     public function getPurchasePriceAttribute($value)
@@ -44,5 +53,16 @@ class Product extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function updateStock()
+    {
+        $this->stock = $this->transactions->sum('quantity');
+        $this->save();
     }
 }

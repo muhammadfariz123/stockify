@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Admin Dashboard - Stockify</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   @vite('resources/css/app.css')
   <style>
     /* Custom Styling */

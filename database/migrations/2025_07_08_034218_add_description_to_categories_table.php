@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('suppliers', function (Blueprint $table) {
-            $table->string('contact')->nullable()->after('address');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->text('description')->nullable(); // Menambahkan kolom description pada categories
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('suppliers', function (Blueprint $table) {
-            $table->dropColumn('contact');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropColumn('description'); // Menghapus kolom description
         });
     }
 };

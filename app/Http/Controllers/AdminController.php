@@ -19,6 +19,9 @@ class AdminController extends Controller
         $productsCount = Product::count(); // Jumlah produk
         $incomingTransactions = 20; // Data dummy untuk transaksi masuk
         $outgoingTransactions = 15; // Data dummy untuk transaksi keluar
+        // Ambil semua produk dengan nama dan stok
+        $products = Product::select('name', 'stock')->get();  // Ambil produk dan stoknya
+
 
         // Ambil aktivitas pengguna terbaru, misalnya pengguna yang login atau melakukan transaksi terbaru
         $latestUsers = User::latest()->take(5)->get(); // Ambil 5 pengguna terbaru
@@ -32,6 +35,7 @@ class AdminController extends Controller
             'productsCount',
             'incomingTransactions',
             'outgoingTransactions',
+            'products',
             'latestUsers',
             'stockGraphData'
         ));
@@ -42,7 +46,9 @@ class AdminController extends Controller
     {
         $products = Product::all();
         $products = Product::with('category', 'supplier')->get();
-        return view('admin.products.index', compact('products'));
+        $categoriesCount = Category::count(); // Menambahkan jumlah kategori
+
+        return view('admin.products.index', compact('products', 'categoriesCount'));
     }
 
     public function create()
@@ -57,18 +63,20 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'purchase_price' => 'required|numeric',
-            'selling_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',  // Validasi harga jual
             'category_id' => 'required|exists:categories,id',
             'supplier_id' => 'required|exists:suppliers,id',
+            'description' => 'nullable|string',
         ]);
 
-        // Simpan produk dengan harga beli dan harga jual dalam sen
+        // Simpan produk
         Product::create([
             'name' => $request->name,
-            'purchase_price' => $request->purchase_price,  // Mengonversi harga beli ke sen di model
-            'selling_price' => $request->selling_price,  // Mengonversi harga jual ke sen di model
+            'purchase_price' => $request->purchase_price,
+            'sale_price' => $request->sale_price,  // Menyimpan harga jual
             'category_id' => $request->category_id,
             'supplier_id' => $request->supplier_id,
+            'description' => $request->description,  // Menyimpan deskripsi
         ]);
 
         return redirect()->route('admin.products.index')
@@ -94,7 +102,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'purchase_price' => 'required|numeric',
-            'selling_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'supplier_id' => 'required|exists:suppliers,id',
         ]);
@@ -103,7 +111,7 @@ class AdminController extends Controller
         $product->update([
             'name' => $request->name,
             'purchase_price' => $request->purchase_price,
-            'selling_price' => $request->selling_price,
+            'sale_price' => $request->sale_price,
             'category_id' => $request->category_id,  // Menyimpan category_id yang baru
             'supplier_id' => $request->supplier_id,
         ]);

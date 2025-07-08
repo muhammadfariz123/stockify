@@ -23,7 +23,8 @@
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <!-- Products Card -->
-            <div class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-indigo-200">
+            <div
+                class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-indigo-200">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-3 rounded-xl">
                         <i class="fas fa-boxes text-white text-xl"></i>
@@ -40,11 +41,14 @@
                         <span class="text-sm font-medium">Stabil</span>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300">
+                </div>
             </div>
 
             <!-- Incoming Transactions Card -->
-            <div class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
+            <div
+                class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-3 rounded-xl">
                         <i class="fas fa-arrow-down text-white text-xl"></i>
@@ -61,11 +65,14 @@
                         <span class="text-sm font-medium">+12% dari minggu lalu</span>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300">
+                </div>
             </div>
 
             <!-- Outgoing Transactions Card -->
-            <div class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-red-200">
+            <div
+                class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-red-200">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-gradient-to-r from-red-500 to-pink-600 p-3 rounded-xl">
                         <i class="fas fa-arrow-up text-white text-xl"></i>
@@ -82,7 +89,9 @@
                         <span class="text-sm font-medium">-5% dari minggu lalu</span>
                     </div>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-300">
+                </div>
             </div>
         </div>
 
@@ -120,12 +129,14 @@
                     <i class="fas fa-users text-white"></i>
                 </div>
             </div>
-            
+
             <div class="space-y-4">
                 @foreach ($latestUsers as $user)
-                    <div class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-100">
+                    <div
+                        class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl hover:shadow-md transition-all duration-300 border border-gray-100">
                         <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
                                 <i class="fas fa-user text-white"></i>
                             </div>
                             <div>
@@ -143,7 +154,7 @@
                     </div>
                 @endforeach
             </div>
-            
+
             @if($latestUsers->isEmpty())
                 <div class="text-center py-12">
                     <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -157,151 +168,76 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Enhanced Chart Configuration
-        var ctx = document.getElementById('stockChart').getContext('2d');
-        
-        // Create gradient
-        var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
-        gradient.addColorStop(1, 'rgba(99, 102, 241, 0.1)');
-        
-        var stockChart = new Chart(ctx, {
-            type: 'bar',
+        // Ambil data produk yang sudah dikirim dari Controller
+        const products = @json($products);  // Mengambil data produk dari controller
+
+        const labels = products.map(product => product.name);  // Nama produk
+        const data = products.map(product => product.stock);  // Stok produk
+
+        // Membuat chart
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        const stockChart = new Chart(ctx, {
+            type: 'bar',  // Jenis grafik (bar chart)
             data: {
-                labels: @json($stockGraphData->pluck('name')),
+                labels: labels,  // Label berdasarkan nama produk
                 datasets: [{
-                    label: 'Stok Barang',
-                    data: @json($stockGraphData->pluck('purchase_price')),
-                    backgroundColor: gradient,
-                    borderColor: 'rgba(99, 102, 241, 1)',
-                    borderWidth: 2,
-                    borderRadius: 8,
-                    borderSkipped: false,
-                    hoverBackgroundColor: 'rgba(99, 102, 241, 0.9)',
-                    hoverBorderColor: 'rgba(99, 102, 241, 1)',
-                    hoverBorderWidth: 3
+                    label: 'Stok Produk',
+                    data: data,  // Data stok produk
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Warna latar belakang bar
+                    borderColor: 'rgba(75, 192, 192, 1)',  // Warna border bar
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            usePointStyle: true,
-                            pointStyle: 'circle',
-                            font: {
-                                size: 12,
-                                weight: 'bold'
-                            },
-                            color: '#374151'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: 'rgba(99, 102, 241, 1)',
-                        borderWidth: 1,
-                        cornerRadius: 8,
-                        displayColors: false
-                    }
-                },
                 scales: {
-                    x: {
-                        beginAtZero: true,
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#6B7280',
-                            font: {
-                                size: 11
-                            }
-                        }
-                    },
                     y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)',
-                            lineWidth: 1
-                        },
-                        ticks: {
-                            color: '#6B7280',
-                            font: {
-                                size: 11
-                            }
-                        }
+                        beginAtZero: true  // Mulai sumbu Y dari 0
                     }
-                },
-                animation: {
-                    duration: 1000,
-                    easing: 'easeInOutQuart'
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
                 }
             }
-        });
-
-        // Add some interactive animations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate statistics cards on load
-            const cards = document.querySelectorAll('.group');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    card.style.transition = 'all 0.5s ease';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                }, index * 200);
-            });
         });
     </script>
 @endpush
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    
+
     * {
         font-family: 'Inter', sans-serif;
     }
-    
+
     .animate-pulse {
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-    
+
     @keyframes pulse {
-        0%, 100% {
+
+        0%,
+        100% {
             opacity: 1;
         }
+
         50% {
             opacity: .5;
         }
     }
-    
+
     /* Custom scrollbar */
     ::-webkit-scrollbar {
         width: 6px;
     }
-    
+
     ::-webkit-scrollbar-track {
         background: #f1f5f9;
     }
-    
+
     ::-webkit-scrollbar-thumb {
         background: #cbd5e1;
         border-radius: 3px;
     }
-    
+
     ::-webkit-scrollbar-thumb:hover {
         background: #94a3b8;
     }
