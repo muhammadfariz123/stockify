@@ -1,4 +1,3 @@
-<!-- resources/views/admin/products/create.blade.php -->
 @extends('layouts.admin')
 
 @section('content')
@@ -132,6 +131,22 @@
                             </select>
                         </div>
 
+                        <!-- Stok Section -->
+                        <div class="space-y-2">
+                            <label for="stock" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <span class="flex items-center space-x-2">
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span>Stok</span>
+                                    <span class="text-red-500">*</span>
+                                </span>
+                            </label>
+                            <input type="number" id="stock" name="stock"
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
+                                placeholder="Masukkan jumlah stok produk" required>
+                        </div>
+
                         <!-- Deskripsi Produk -->
                         <div class="space-y-2">
                             <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -144,7 +159,7 @@
                             </label>
                             <textarea id="description" name="description" rows="4"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white resize-none"
-                                placeholder="Masukkan deskripsi produk (opsional)"></textarea>
+                                placeholder="Masukkan atribut produk (misalnya: ukuran, warna, berat)"></textarea>
                         </div>
 
                         <!-- Submit Button -->

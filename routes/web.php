@@ -4,9 +4,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\CategoryController; // Pastikan ini sudah diimport
+use App\Http\Controllers\StockOpnameController; // Pastikan ini sudah diimport
 use App\Http\Controllers\SupplierController; // Pastikan ini sudah diimport
 use App\Http\Controllers\ProductController;  // Import ProductController
 use App\Http\Controllers\ReportController;  // Import ReportController
+use App\Http\Controllers\TransactionController;  // Import ReportController
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
@@ -44,15 +47,50 @@ Route::middleware('auth')->group(function () {
 });
 
 // ========== ADMIN ==========
+// ========== ADMIN ==========
 
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'role:Admin'])
     ->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        // Rute logout
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
+
+        // USERS
+        Route::get('users', [AdminController::class, 'indexUsers'])->name('users.index');
+        Route::get('users/create', [AdminController::class, 'createUser'])->name('users.create');
+        Route::post('users', [AdminController::class, 'storeUser'])->name('users.store');
+        Route::get('users/{user}/edit', [AdminController::class, 'editUser'])->name('users.edit');
+        Route::put('users/{user}', [AdminController::class, 'updateUser'])->name('users.update');
+        Route::delete('users/{user}', [AdminController::class, 'destroyUser'])->name('users.destroy');
+
+
+
 
         // Resource untuk produk → uri /admin/products ; names admin.products.*
         Route::resource('products', AdminController::class);
+
+        // Menambahkan rute untuk pengaturan aplikasi
+        Route::get('settings', [AdminController::class, 'showSettings'])->name('settings.index');
+
+        // Menambahkan rute untuk laporan aktivitas
+        Route::get('reports/activity', [AdminController::class, 'showActivityReport'])->name('reports.activity');
+
+        // Menambahkan rute untuk laporan stok
+        Route::get('reports/stock', [AdminController::class, 'showStockReport'])->name('reports.stock');
+
+        // Menambahkan rute untuk laporan transaksi
+        Route::get('reports/transactions', [AdminController::class, 'showTransactionsReport'])->name('reports.transactions');
+
+        // Menambahkan rute untuk stock opname
+        Route::get('stockopname', [AdminController::class, 'indexStockOpname'])->name('stockopname.index');
+
+        // Menambahkan rute untuk transaksi
+        Route::get('transactions/in', [AdminController::class, 'showIncomingTransactions'])->name('transactions.in');
+        Route::get('transactions/out', [AdminController::class, 'showOutgoingTransactions'])->name('transactions.out');
 
         // Resource untuk supplier → uri /admin/suppliers ; names admin.suppliers.*
         Route::resource('suppliers', SupplierController::class);  // Tambahkan rute ini
@@ -64,37 +102,35 @@ Route::prefix('admin')
         Route::get('reports', [AdminController::class, 'showReports'])->name('reports.index');
     });
 
+
 // ========== MANAGER GUDANG ==========
-
-Route::middleware(['role:Manajer Gudang'])->group(function () {
-    Route::get('/manager/dashboard', [ManagerController::class, 'index'])->name('manager.dashboard');
-    Route::get('/manager/stock', [ManagerController::class, 'showstock'])->name('manager.stock.index');
-    Route::get('/manager/products', [ManagerController::class, 'products'])->name('manager.products.index');
-    Route::post('/manager/products', [ManagerController::class, 'addProduct'])->name('manager.products.add');
-    Route::get('/manager/suppliers', [ManagerController::class, 'suppliers'])->name('manager.suppliers.index');
-    Route::get('/manager/reports', [ManagerController::class, 'reports'])->name('manager.reports.index');
-});
-
-// Menambahkan Rute untuk Produk
+// Routes untuk manager
 Route::prefix('manager')
-    ->middleware(['auth', 'role:Manajer Gudang'])
+    ->name('manager.')
+    ->middleware(['auth', 'role:Manajer Gudang']) // Menggunakan middleware role
     ->group(function () {
-        Route::get('products', [ProductController::class, 'index'])->name('manager.products.index');
-        Route::get('products/create', [ProductController::class, 'create'])->name('manager.products.create');
-        Route::post('products', [ProductController::class, 'store'])->name('manager.products.store');
+        Route::get('dashboard', [ManagerController::class, 'index'])->name('dashboard');
+        Route::get('products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('transactions/in', [TransactionController::class, 'showIncomingForm'])->name('transactions.in');
+        Route::post('transactions/in', [TransactionController::class, 'storeIncoming'])->name('transactions.store.in');
+        Route::get('transactions/out', [TransactionController::class, 'showOutgoingForm'])->name('transactions.out');
+        Route::post('transactions/out', [TransactionController::class, 'storeOutgoing'])->name('transactions.store.out');
+        Route::get('stockopname', [StockOpnameController::class, 'index'])->name('stockopname.index');
+        Route::post('stockopname', [StockOpnameController::class, 'store'])->name('stockopname.store');
+
+        Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+        // Rute untuk Supplier yang dapat diakses oleh Manajer Gudang
+        Route::get('suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+        // Menambahkan rute untuk laporan stok
+        Route::get('reports/stock', [ReportController::class, 'stockReport'])->name('reports.stock');
+        // Menambahkan rute untuk laporan transaksi
+        Route::get('reports/transactions', [ReportController::class, 'transactionReport'])->name('reports.transactions');
+
+
+
     });
 
-// ========== RUTE LAPORAN ==========
 
-Route::prefix('manager')
-    ->middleware(['auth', 'role:Manajer Gudang'])
-    ->group(function () {
-        // Rute untuk laporan stok
-        Route::get('reports/stock', [ReportController::class, 'stockReport'])->name('manager.reports.stock');
-        
-        // Rute untuk laporan transaksi
-        Route::get('reports/transactions', [ReportController::class, 'transactionReport'])->name('manager.reports.transactions');
-    });
 
 // ========== STAFF GUDANG ==========
 
@@ -103,8 +139,11 @@ Route::prefix('staff')
     ->middleware(['auth', 'role:Staff Gudang'])
     ->group(function () {
         Route::get('dashboard', [StaffController::class, 'dashboard'])->name('dashboard');
-        Route::post('stock/in', [StaffController::class, 'receiveStock'])->name('stock.in');
-        Route::post('stock/out', [StaffController::class, 'dispatchStock'])->name('stock.out');
+        Route::post('stock/in', [StaffController::class, 'receiveStock'])->name('receiveStock');
+        Route::post('stock/out', [StaffController::class, 'dispatchStock'])->name('dispatchStock');
+        // Pastikan rute ini ada untuk staff stock
+        Route::get('stock', [StaffController::class, 'showStock'])->name('stock.index');
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
 
 require __DIR__ . '/auth.php';

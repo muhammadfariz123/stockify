@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\ActivityLog; // ✅ Tambahkan ini
+use Illuminate\Support\Facades\Auth; // ✅ Tambahkan ini
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -16,8 +18,9 @@ class SupplierController extends Controller
     // Menampilkan daftar supplier
     public function index()
     {
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::all(); // Mengambil semua data supplier
         return view('admin.suppliers.index', compact('suppliers'));
+        return view('manager.suppliers.index', compact('suppliers'));  // Mengirim data ke tampilan
     }
 
     // Menampilkan form untuk membuat supplier baru
@@ -35,7 +38,15 @@ class SupplierController extends Controller
             'contact' => 'nullable|string|max:255',
         ]);
 
-        Supplier::create($request->only('name', 'address', 'contact'));
+        $supplier = Supplier::create($request->only('name', 'address', 'contact'));
+
+        // ✅ Logging aktivitas membuat supplier
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Membuat Supplier',
+            'description' => 'Supplier "' . $supplier->name . '" berhasil ditambahkan.',
+        ]);
 
         return redirect()->route('admin.suppliers.index')
             ->with('success', 'Supplier berhasil ditambahkan.');
@@ -64,6 +75,14 @@ class SupplierController extends Controller
 
         $supplier->update($request->only('name', 'address', 'contact'));
 
+        // ✅ Logging aktivitas memperbarui supplier
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Memperbarui Supplier',
+            'description' => 'Supplier "' . $supplier->name . '" berhasil diperbarui.',
+        ]);
+
         return redirect()->route('admin.suppliers.index')
             ->with('success', 'Supplier berhasil diperbarui.');
     }
@@ -71,7 +90,16 @@ class SupplierController extends Controller
     // Menghapus supplier
     public function destroy(Supplier $supplier)
     {
+        $supplierName = $supplier->name;
         $supplier->delete();
+
+        // ✅ Logging aktivitas menghapus supplier
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Menghapus Supplier',
+            'description' => 'Supplier "' . $supplierName . '" berhasil dihapus.',
+        ]);
 
         return redirect()->route('admin.suppliers.index')
             ->with('success', 'Supplier berhasil dihapus.');

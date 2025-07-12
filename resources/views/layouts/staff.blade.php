@@ -19,6 +19,15 @@
                 <li><a href="{{ route('staff.stock.index') }}" class="text-white">Stok</a></li>
                 <li><a href="{{ route('staff.receiveStock') }}" class="text-white">Terima Barang</a></li>
                 <li><a href="{{ route('staff.dispatchStock') }}" class="text-white">Kirim Barang</a></li>
+                <form action="{{ route('staff.logout') }}" method="POST"
+                    class="logout-btn flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:text-white font-medium border border-red-500">
+                    @csrf
+                    <button type="submit" class="flex items-center gap-3 w-full">
+                        <i data-feather="log-out" class="w-5 h-5"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+
             </ul>
         </div>
 

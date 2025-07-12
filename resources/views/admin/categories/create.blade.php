@@ -1,4 +1,3 @@
-<!-- resources/views/admin/categories/create.blade.php -->
 @extends('layouts.admin')
 
 @section('content')
@@ -50,26 +49,6 @@
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- Description Field -->
-        <div class="group">
-          <label for="description" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
-            <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
-            </svg>
-            Deskripsi
-          </label>
-          <div class="relative">
-            <textarea name="description" id="description" rows="4"
-                      class="w-full px-4 py-3 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 hover:bg-white hover:border-gray-300 resize-none"
-                      placeholder="Masukkan deskripsi kategori (opsional)">{{ old('description') }}</textarea>
-            <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
-              <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
               </svg>
             </div>
           </div>

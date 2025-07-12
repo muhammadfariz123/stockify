@@ -11,15 +11,17 @@ class ReportController extends Controller
 {
     public function stockReport()
     {
-        // Laporan stok per kategori
-        $reports = Product::with('category')->get();
-        return view('manager.reports.stock', compact('reports'));
+        // Ambil data yang diperlukan untuk laporan stok
+        $products = Product::all();  // Contoh ambil semua produk sebagai laporan stok
+
+        return view('manager.reports.stock', compact('products'));  // Kirim data ke tampilan laporan stok
     }
 
     public function transactionReport()
     {
-        // Laporan transaksi barang masuk dan keluar
-        $transactions = Transaction::all();
-        return view('manager.reports.transactions', compact('transactions'));
+        // Ambil data yang diperlukan untuk laporan transaksi
+        $transactions = Transaction::all();  // Contoh ambil semua transaksi
+
+        return view('manager.reports.transactions', compact('transactions'));  // Kirim data ke tampilan laporan transaksi
     }
 }

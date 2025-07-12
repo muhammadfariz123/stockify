@@ -9,6 +9,11 @@ class Product extends Model
 {
     use HasFactory;
 
+    // Pastikan field yang sesuai ter-cast ke tipe yang benar
+    protected $casts = [
+        'purchase_price' => 'decimal:2',  // Menyimpan harga dengan dua angka di belakang koma
+        'sale_price' => 'decimal:2',  // Menyimpan harga jual dengan dua angka di belakang koma
+    ];
     protected $fillable = [
         'name',
         'description',

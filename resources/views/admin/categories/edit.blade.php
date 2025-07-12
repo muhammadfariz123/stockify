@@ -1,4 +1,3 @@
-<!-- resources/views/admin/categories/edit.blade.php -->
 @extends('layouts.admin')
 
 @section('content')
@@ -55,26 +54,6 @@
           </div>
         </div>
 
-        <!-- Description Field -->
-        <div class="group">
-          <label for="description" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center">
-            <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
-            </svg>
-            Deskripsi
-          </label>
-          <div class="relative">
-            <textarea name="description" id="description" rows="4"
-                      class="w-full px-4 py-3 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:bg-white hover:border-gray-300 resize-none"
-                      placeholder="Masukkan deskripsi kategori (opsional)">{{ old('description', $category->description) }}</textarea>
-            <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
-              <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-
         <!-- Action Buttons -->
         <div class="flex items-center justify-between pt-6 border-t border-gray-100">
           <a href="{{ route('admin.categories.index') }}"
@@ -104,7 +83,7 @@
         </svg>
         <div>
           <h3 class="text-sm font-medium text-blue-900">Tips Pengisian</h3>
-          <p class="text-sm text-blue-700 mt-1">Gunakan nama kategori yang jelas dan mudah dipahami. Deskripsi membantu pengguna memahami konten dalam kategori ini.</p>
+          <p class="text-sm text-blue-700 mt-1">Gunakan nama kategori yang jelas dan mudah dipahami.</p>
         </div>
       </div>
     </div>
@@ -115,11 +94,11 @@
   .group:hover .group-hover\:scale-105 {
     transform: scale(1.05);
   }
-  
+
   input:focus, textarea:focus {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
-  
+
   .group input:focus + .absolute svg,
   .group textarea:focus + .absolute svg {
     color: #3b82f6;

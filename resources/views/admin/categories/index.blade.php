@@ -48,14 +48,6 @@
                                     <th class="px-8 py-5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                                         <div class="flex items-center space-x-2">
                                             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                            </svg>
-                                            <span>Deskripsi</span>
-                                        </div>
-                                    </th>
-                                    <th class="px-8 py-5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                        <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
                                             </svg>
                                             <span>Aksi</span>
@@ -75,22 +67,6 @@
                                                     <div class="text-sm font-semibold text-gray-900">{{ $category->name }}</div>
                                                     <div class="text-xs text-gray-500">Kategori Produk</div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-8 py-6">
-                                            <div class="text-sm text-gray-700 max-w-xs">
-                                                @if($category->description)
-                                                    <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-500">
-                                                        <p class="truncate">{{ $category->description }}</p>
-                                                    </div>
-                                                @else
-                                                    <div class="text-gray-400 italic flex items-center space-x-2">
-                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                                                        </svg>
-                                                        <span>Tidak ada deskripsi</span>
-                                                    </div>
-                                                @endif
                                             </div>
                                         </td>
                                         <td class="px-8 py-6 whitespace-nowrap text-sm font-medium">

@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/manager.blade.php -->
 <!DOCTYPE html>
 <html lang="id">
 
@@ -26,29 +25,44 @@
 
             <!-- Navigation Menu -->
             <nav class="p-4 space-y-2 flex-1">
-                <a href="{{ route('manager.dashboard') }}" 
-                   class="flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-emerald-700 px-4 py-3 rounded-lg transition-all duration-200 group">
+                <!-- Dashboard Menu -->
+                <a href="{{ route('manager.dashboard') }}"
+                    class="flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-emerald-700 px-4 py-3 rounded-lg transition-all duration-200 group">
                     <i class="fas fa-chart-line w-5 text-center group-hover:scale-110 transition-transform"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
-                
-                <a href="{{ route('manager.stock.index') }}" 
-                   class="flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-emerald-700 px-4 py-3 rounded-lg transition-all duration-200 group">
-                    <i class="fas fa-warehouse w-5 text-center group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">Manajemen Stok</span>
-                </a>
-                
-                <a href="{{ route('manager.products.index') }}" 
-                   class="flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-emerald-700 px-4 py-3 rounded-lg transition-all duration-200 group">
-                    <i class="fas fa-box w-5 text-center group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">Produk</span>
-                </a>
-                
-                <a href="{{ route('manager.reports.index') }}" 
-                   class="flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-emerald-700 px-4 py-3 rounded-lg transition-all duration-200 group">
-                    <i class="fas fa-file-alt w-5 text-center group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">Laporan</span>
-                </a>
+
+                <!-- Produk Menu -->
+                <div>
+                    <div class="font-semibold text-emerald-100 mt-4">📦 Produk</div>
+                    <a href="{{ route('manager.products.index') }}"
+                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Daftar Produk</a>
+                </div>
+
+                <!-- Stok Menu -->
+                <div>
+                    <div class="font-semibold text-emerald-100 mt-4">📦 Stok</div>
+                    <a href="{{ route('manager.transactions.in') }}"
+                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Barang Masuk</a>
+                    <a href="{{ route('manager.transactions.out') }}"
+                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Barang Keluar</a>
+                    <a href="{{ route('manager.stockopname.index') }}"
+                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Stock Opname</a>
+                </div>
+
+                <!-- Supplier Menu -->
+                <a href="{{ route('manager.suppliers.index') }}"
+                    class="block py-2 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Supplier</a>
+
+                <!-- Laporan Menu -->
+                <div>
+                    <div class="font-semibold text-emerald-100 mt-4">📦 Laporan</div>
+                    <a href="{{ route('manager.reports.stock') }}"
+                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Laporan Stok</a>
+                    <a href="{{ route('manager.reports.transactions') }}"
+                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Laporan
+                        Transaksi</a>
+                </div>
             </nav>
 
             <!-- User Profile & Logout Section -->
@@ -63,12 +77,12 @@
                         <p class="text-emerald-200 text-xs">Gudang Utama</p>
                     </div>
                 </div>
-                
+
                 <!-- Logout Button -->
                 <form action="{{ route('logout') }}" method="POST" class="w-full">
                     @csrf
-                    <button type="submit" 
-                            class="w-full flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-red-600 px-4 py-3 rounded-lg transition-all duration-200 group">
+                    <button type="submit"
+                        class="w-full flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-red-600 px-4 py-3 rounded-lg transition-all duration-200 group">
                         <i class="fas fa-sign-out-alt w-5 text-center group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">Logout</span>
                     </button>
@@ -85,20 +99,6 @@
                         <h1 class="text-2xl font-semibold text-gray-800">Dashboard Manajer</h1>
                         <p class="text-gray-600 text-sm mt-1">Kelola inventori dan stok gudang dengan mudah</p>
                     </div>
-                    
-                    <!-- User Actions -->
-                    <div class="flex items-center space-x-4">
-                        <!-- Notification Bell -->
-                        <button class="relative p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
-                            <i class="fas fa-bell text-lg"></i>
-                            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
-                        </button>
-                        
-                        <!-- Settings Button -->
-                        <button class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
-                            <i class="fas fa-cog text-lg"></i>
-                        </button>
-                    </div>
                 </div>
             </header>
 
@@ -114,34 +114,34 @@
     <!-- Custom Styles -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+
         .font-inter {
             font-family: 'Inter', sans-serif;
         }
-        
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 3px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-        
+
         /* Smooth transitions */
         * {
             transition: all 0.2s ease-in-out;
         }
-        
+
         /* Active link styling */
         nav a.active {
             background-color: rgba(16, 185, 129, 0.2);

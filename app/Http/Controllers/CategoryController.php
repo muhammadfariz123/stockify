@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\ActivityLog; // ✅ Tambahkan
+use Illuminate\Support\Facades\Auth; // ✅ Tambahkan
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -34,7 +36,15 @@ class CategoryController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Category::create($request->only('name', 'description'));
+        $category = Category::create($request->only('name', 'description'));
+
+        // ✅ Logging aktivitas
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Membuat Kategori',
+            'description' => 'Kategori "' . $category->name . '" ditambahkan.',
+        ]);
 
         return redirect()->route('admin.categories.index')
                          ->with('success', 'Kategori berhasil ditambahkan.');
@@ -62,6 +72,14 @@ class CategoryController extends Controller
 
         $category->update($request->only('name', 'description'));
 
+        // ✅ Logging aktivitas
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Memperbarui Kategori',
+            'description' => 'Kategori "' . $category->name . '" diperbarui.',
+        ]);
+
         return redirect()->route('admin.categories.index')
                          ->with('success', 'Kategori berhasil diperbarui.');
     }
@@ -69,7 +87,16 @@ class CategoryController extends Controller
     // Menghapus kategori
     public function destroy(Category $category)
     {
+        $categoryName = $category->name; // Simpan nama sebelum dihapus
         $category->delete();
+
+        // ✅ Logging aktivitas
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Menghapus Kategori',
+            'description' => 'Kategori "' . $categoryName . '" dihapus.',
+        ]);
 
         return redirect()->route('admin.categories.index')
                          ->with('success', 'Kategori berhasil dihapus.');
