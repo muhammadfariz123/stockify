@@ -195,6 +195,36 @@
                     </div>
                 </div>
 
+                 <!-- Laporan Section -->
+                <div class="space-y-2">
+                    <div class="section-header flex items-center justify-between px-4 py-3 text-sm font-semibold text-gray-700 bg-gray-50 rounded-lg"
+                        data-section="reports">
+                        <div class="flex items-center gap-2">
+                            <i data-feather="bar-chart-2" class="w-4 h-4"></i>
+                            <span>Laporan</span>
+                        </div>
+                        <i data-feather="chevron-right" class="w-4 h-4 icon-rotate"></i>
+                    </div>
+                    <div class="submenu space-y-1 pl-6" id="reports-submenu">
+                        <a href="{{ route('admin.reports.stock') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                            <i data-feather="package" class="w-4 h-4"></i>
+                            <span>Laporan Stok</span>
+                        </a>
+                        <a href="{{ route('admin.reports.transactions') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                            <i data-feather="activity" class="w-4 h-4"></i>
+                            <span>Laporan Transaksi</span>
+                        </a>
+                        <a href="{{ route('admin.reports.activity') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                            <i data-feather="clock" class="w-4 h-4"></i>
+                            <span>Laporan Aktivitas</span>
+                        </a>
+                    </div>
+                </div>
+
+
                 <!-- Supplier -->
                 <a href="{{ route('admin.suppliers.index') }} "
                     class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
