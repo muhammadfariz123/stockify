@@ -34,14 +34,14 @@
 
                 <!-- Produk Menu -->
                 <div>
-                    <div class="font-semibold text-white mt-4">📦 Produk</div>
+                    <div class="font-bold text-xl text-white mt-4 mb-2">📦 Produk</div>
                     <a href="{{ route('manager.products.index') }}"
                         class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Daftar Produk</a>
                 </div>
 
                 <!-- Stok Menu -->
                 <div>
-                    <div class="font-semibold text-white mt-4">📦 Stok</div>
+                    <div class="font-bold text-xl text-white mt-4 mb-2">📦 Stok</div>
                     <a href="{{ route('manager.transactions.in') }}"
                         class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Barang Masuk</a>
                     <a href="{{ route('manager.transactions.out') }}"
@@ -56,7 +56,7 @@
 
                 <!-- Laporan Menu -->
                 <div>
-                    <div class="font-semibold text-white mt-4">📦 Laporan</div>
+                    <div class="font-bold text-xl text-white mt-4 mb-2">📦 Laporan</div>
                     <a href="{{ route('manager.reports.stock') }}"
                         class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Laporan Stok</a>
                     <a href="{{ route('manager.reports.transactions') }}"
