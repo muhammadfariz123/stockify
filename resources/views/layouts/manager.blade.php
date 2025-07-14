@@ -12,12 +12,12 @@
 <body class="bg-gray-50 font-inter">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-gradient-to-b from-emerald-800 to-emerald-900 shadow-xl flex flex-col">
+        <div class="w-64 bg-gradient-to-b from-[#00712D] to-[#005c1e] shadow-xl flex flex-col">
             <!-- Logo Section -->
-            <div class="p-6 border-b border-emerald-700">
+            <div class="p-6 border-b border-[#005c1e]">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                        <i class="fas fa-boxes text-emerald-800 text-lg"></i>
+                        <i class="fas fa-boxes text-[#00712D] text-lg"></i>
                     </div>
                     <h2 class="text-white text-xl font-bold tracking-wide">Stockify</h2>
                 </div>
@@ -27,54 +27,53 @@
             <nav class="p-4 space-y-2 flex-1">
                 <!-- Dashboard Menu -->
                 <a href="{{ route('manager.dashboard') }}"
-                    class="flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-emerald-700 px-4 py-3 rounded-lg transition-all duration-200 group">
+                    class="flex items-center space-x-3 text-white hover:text-[#00712D] hover:bg-white px-4 py-3 rounded-lg transition-all duration-300 ease-in-out group transform hover:scale-105 hover:shadow-lg active:bg-[#005c1e] active:text-white">
                     <i class="fas fa-chart-line w-5 text-center group-hover:scale-110 transition-transform"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
 
                 <!-- Produk Menu -->
                 <div>
-                    <div class="font-semibold text-emerald-100 mt-4">📦 Produk</div>
+                    <div class="font-semibold text-white mt-4">📦 Produk</div>
                     <a href="{{ route('manager.products.index') }}"
-                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Daftar Produk</a>
+                        class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Daftar Produk</a>
                 </div>
 
                 <!-- Stok Menu -->
                 <div>
-                    <div class="font-semibold text-emerald-100 mt-4">📦 Stok</div>
+                    <div class="font-semibold text-white mt-4">📦 Stok</div>
                     <a href="{{ route('manager.transactions.in') }}"
-                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Barang Masuk</a>
+                        class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Barang Masuk</a>
                     <a href="{{ route('manager.transactions.out') }}"
-                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Barang Keluar</a>
+                        class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Barang Keluar</a>
                     <a href="{{ route('manager.stockopname.index') }}"
-                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Stock Opname</a>
+                        class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Stock Opname</a>
                 </div>
 
                 <!-- Supplier Menu -->
                 <a href="{{ route('manager.suppliers.index') }}"
-                    class="block py-2 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Supplier</a>
+                    class="block py-2 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Supplier</a>
 
                 <!-- Laporan Menu -->
                 <div>
-                    <div class="font-semibold text-emerald-100 mt-4">📦 Laporan</div>
+                    <div class="font-semibold text-white mt-4">📦 Laporan</div>
                     <a href="{{ route('manager.reports.stock') }}"
-                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Laporan Stok</a>
+                        class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Laporan Stok</a>
                     <a href="{{ route('manager.reports.transactions') }}"
-                        class="block py-1 px-3 text-emerald-100 hover:text-white hover:bg-emerald-700">Laporan
-                        Transaksi</a>
+                        class="block py-1 px-3 text-white hover:text-[#00712D] hover:bg-white rounded-md transition-all duration-300 ease-in-out">Laporan Transaksi</a>
                 </div>
             </nav>
 
             <!-- User Profile & Logout Section -->
-            <div class="p-4 border-t border-emerald-700">
+            <div class="p-4 border-t border-[#005c1e]">
                 <!-- User Profile -->
                 <div class="flex items-center space-x-3 px-4 py-3 mb-3">
-                    <div class="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center">
+                    <div class="w-8 h-8 bg-[#00712D] rounded-full flex items-center justify-center">
                         <i class="fas fa-user text-white text-sm"></i>
                     </div>
                     <div class="text-sm">
                         <p class="font-medium text-white">Manager</p>
-                        <p class="text-emerald-200 text-xs">Gudang Utama</p>
+                        <p class="text-[#00b88c] text-xs">Gudang Utama</p>
                     </div>
                 </div>
 
@@ -82,7 +81,7 @@
                 <form action="{{ route('logout') }}" method="POST" class="w-full">
                     @csrf
                     <button type="submit"
-                        class="w-full flex items-center space-x-3 text-emerald-100 hover:text-white hover:bg-red-600 px-4 py-3 rounded-lg transition-all duration-200 group">
+                        class="w-full flex items-center space-x-3 text-white hover:text-[#212121] hover:bg-red-600 px-4 py-3 rounded-md transition-all duration-300 ease-in-out group transform hover:scale-105 hover:shadow-lg active:bg-[#e31b23] active:text-white">
                         <i class="fas fa-sign-out-alt w-5 text-center group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">Logout</span>
                     </button>
@@ -96,7 +95,7 @@
             <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-2xl font-semibold text-gray-800">Dashboard Manajer</h1>
+                        <h1 class="text-2xl font-semibold text-[#00712D]">Dashboard Manajer</h1>
                         <p class="text-gray-600 text-sm mt-1">Kelola inventori dan stok gudang dengan mudah</p>
                     </div>
                 </div>
@@ -139,14 +138,46 @@
 
         /* Smooth transitions */
         * {
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         /* Active link styling */
         nav a.active {
-            background-color: rgba(16, 185, 129, 0.2);
+            background-color: rgba(0, 113, 45, 0.2);
             color: white;
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #00712D;
+        }
+
+        /* Sidebar gradient */
+        .sidebar-gradient {
+            background: linear-gradient(180deg, #00712D 0%, #005c1e 100%);
+        }
+
+        /* Hover Effects */
+        a:hover, button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 113, 45, 0.2);
+        }
+
+        /* Active state on buttons and links */
+        a:active, button:active {
+            transform: scale(0.98);
+            box-shadow: none;
+            background-color: rgba(0, 113, 45, 0.3);
+        }
+
+        /* Rounded corners for all menu items */
+        .rounded-md {
+            border-radius: 8px;
+        }
+
+        /* Specific color for headers */
+        h1, h2 {
+            color: #00712D;
+        }
+
+        .text-emerald-100 {
+            color: #00712D;
         }
     </style>
 </body>
