@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 p-6">
         <!-- Header Section -->
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div class="space-y-2">
-                    <h1 class="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    <h1 class="text-4xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                         Dashboard Admin
                     </h1>
                     <p class="text-gray-600 text-lg">Selamat datang kembali! Berikut adalah ringkasan aktivitas hari ini.
@@ -28,18 +28,15 @@
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <!-- Products Card -->
-            <div
-                class="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/50 hover:border-indigo-200/50 hover:-translate-y-1">
-                <div
-                    class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-blue-300/50 hover:translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative z-10">
                     <div class="flex items-center justify-between mb-6">
                         <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-2xl shadow-lg">
                             <i class="fas fa-boxes text-white text-2xl"></i>
                         </div>
                         <div class="text-right">
-                            <p class="text-4xl font-bold text-gray-800 mb-1">{{ $productsCount }}</p>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $productsCount }}</p>
                             <p class="text-sm text-gray-500 uppercase tracking-wider">Produk</p>
                         </div>
                     </div>
@@ -49,19 +46,16 @@
                 </div>
             </div>
 
-            <!-- Transaksi Masuk -->
-            <div
-                class="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/50 hover:border-green-200/50 hover:-translate-y-1">
-                <div
-                    class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
+            <!-- Incoming Transactions -->
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-green-300/50 hover:translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative z-10">
                     <div class="flex items-center justify-between mb-6">
                         <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl shadow-lg">
                             <i class="fas fa-arrow-down text-white text-2xl"></i>
                         </div>
                         <div class="text-right">
-                            <p class="text-4xl font-bold text-gray-800 mb-1">{{ $incomingTransactions }}</p>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $incomingTransactions }}</p>
                             <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi</p>
                         </div>
                     </div>
@@ -71,19 +65,16 @@
                 </div>
             </div>
 
-            <!-- Transaksi Keluar -->
-            <div
-                class="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/50 hover:border-red-200/50 hover:-translate-y-1">
-                <div
-                    class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-pink-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
+            <!-- Outgoing Transactions -->
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-red-300/50 hover:translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div class="relative z-10">
                     <div class="flex items-center justify-between mb-6">
                         <div class="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-2xl shadow-lg">
                             <i class="fas fa-arrow-up text-white text-2xl"></i>
                         </div>
                         <div class="text-right">
-                            <p class="text-4xl font-bold text-gray-800 mb-1">{{ $outgoingTransactions }}</p>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $outgoingTransactions }}</p>
                             <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi</p>
                         </div>
                     </div>
@@ -95,24 +86,13 @@
         </div>
 
         <!-- Chart Section -->
-        <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl mb-8 border border-white/50">
+        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg mb-8 border border-white/50">
             <div class="flex items-center justify-between mb-8">
                 <div class="space-y-2">
-                    <h3 class="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                         Grafik Stok Barang
                     </h3>
                     <p class="text-gray-600 text-lg">Visualisasi data stok produk dalam gudang</p>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <div class="flex space-x-1">
-                            <div class="w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
-                            <div class="w-3 h-3 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 0.5s">
-                            </div>
-                            <div class="w-3 h-3 bg-pink-500 rounded-full animate-pulse" style="animation-delay: 1s"></div>
-                        </div>
-                        <span class="text-sm text-gray-500 ml-2">Live Data</span>
-                    </div>
                 </div>
             </div>
             <div class="bg-gradient-to-br from-indigo-50/50 to-purple-50/50 rounded-2xl p-6 border border-indigo-100/50">
@@ -120,10 +100,10 @@
             </div>
         </div>
 
-        {{-- Bagian Pengguna Baru --}}
+        {{-- Pengguna Baru --}}
         <div class="space-y-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                     Pengguna Baru Bergabung
                 </h3>
                 <div class="flex items-center space-x-2">
@@ -184,10 +164,10 @@
 
         <hr class="my-10 border-t border-gray-200">
 
-        {{-- Bagian Aktivitas Terbaru --}}
+        {{-- Aktivitas Terbaru --}}
         <div class="space-y-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                     Aktivitas Pengguna Terakhir
                 </h3>
                 <div class="flex items-center space-x-2">
@@ -278,112 +258,3 @@
         });
     </script>
 @endpush
-
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-    * {
-        font-family: 'Inter', sans-serif;
-    }
-
-    /* Enhanced animations */
-    .animate-pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
-    @keyframes pulse {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.5;
-        }
-    }
-
-    /* Slide in animation for user cards */
-    .group {
-        animation: slideInUp 0.6s ease-out forwards;
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    @keyframes slideInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: rgba(241, 245, 249, 0.5);
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #cbd5e1, #94a3b8);
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #94a3b8, #64748b);
-    }
-
-    /* Glassmorphism effect */
-    .backdrop-blur-sm {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-    }
-
-    /* Enhanced hover effects */
-    .group:hover {
-        transform: translateY(-4px);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Floating animation */
-    @keyframes float {
-
-        0%,
-        100% {
-            transform: translateY(0px);
-        }
-
-        50% {
-            transform: translateY(-10px);
-        }
-    }
-
-    .float-animation {
-        animation: float 3s ease-in-out infinite;
-    }
-
-    /* Gradient text animation */
-    @keyframes gradientShift {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-    .gradient-animate {
-        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-        background-size: 400% 400%;
-        animation: gradientShift 15s ease infinite;
-    }
-</style>
