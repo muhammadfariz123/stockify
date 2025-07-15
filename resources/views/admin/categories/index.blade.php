@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
+    <div class="min-h-screen p-6">
         <div class="max-w-7xl mx-auto">
             <!-- Main Container -->
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
                 
                 <!-- Header Section -->
-                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-8">
+                <div class="bg-gradient-to-r from-[#0065F8] to-[#0048c1] p-8">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-4">
                             <div class="w-14 h-14 bg-white bg-opacity-20 rounded-xl flex items-center justify-center backdrop-blur-sm">
@@ -35,19 +35,19 @@
                 <div class="p-8">
                     <div class="overflow-hidden rounded-xl border border-gray-200 shadow-sm">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                            <thead class="bg-gradient-to-r from-[#0065F8] to-[#0048c1]">
                                 <tr>
-                                    <th class="px-8 py-5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                    <th class="px-8 py-5 text-left text-xs font-bold text-white uppercase tracking-wider">
                                         <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                                             </svg>
                                             <span>Nama</span>
                                         </div>
                                     </th>
-                                    <th class="px-8 py-5 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                    <th class="px-8 py-5 text-left text-xs font-bold text-white uppercase tracking-wider">
                                         <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
                                             </svg>
                                             <span>Aksi</span>
@@ -60,7 +60,7 @@
                                     <tr class="hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200 group">
                                         <td class="px-8 py-6 whitespace-nowrap">
                                             <div class="flex items-center space-x-3">
-                                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+                                                <div class="w-10 h-10 bg-gradient-to-r from-[#0065F8] to-[#0048c1] rounded-lg flex items-center justify-center shadow-md">
                                                     <span class="text-white font-bold text-sm">{{ strtoupper(substr($category->name, 0, 1)) }}</span>
                                                 </div>
                                                 <div>
@@ -72,7 +72,7 @@
                                         <td class="px-8 py-6 whitespace-nowrap text-sm font-medium">
                                             <div class="flex items-center gap-3">
                                                 <a href="{{ route('admin.categories.edit', $category) }}" 
-                                                   class="inline-flex items-center px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-800 rounded-lg transition-all duration-200 gap-2 group/edit">
+                                                   class="inline-flex items-center px-3 py-2 bg-[#0065F8] hover:bg-[#0048c1] text-white hover:text-white rounded-lg transition-all duration-200 gap-2 group/edit">
                                                     <svg class="w-4 h-4 group-hover/edit:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                                     </svg>
@@ -105,7 +105,7 @@
                         <div class="max-w-md mx-auto">
                             <!-- Animated Icon -->
                             <div class="mb-6">
-                                <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                                <div class="w-20 h-20 bg-gradient-to-r from-[#0065F8] to-[#0048c1] rounded-2xl flex items-center justify-center mx-auto shadow-lg">
                                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                     </svg>
@@ -115,8 +115,9 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Tidak ada kategori</h3>
                             <p class="text-gray-500 mb-8 leading-relaxed">Mulai dengan menambahkan kategori pertama Anda untuk mengorganisir produk dengan lebih baik.</p>
                             
+
                             <a href="{{ route('admin.categories.create') }}" 
-                               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 gap-3">
+                               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#0065F8] to-[#0048c1] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 gap-3">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>

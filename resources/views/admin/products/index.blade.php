@@ -12,7 +12,7 @@
                     <p class="text-gray-600 text-sm lg:text-base">Kelola semua produk dengan mudah dan efisien</p>
                 </div>
                 <a href="{{ route('admin.products.create') }}"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded-xl">
+                    class="bg-[#0065F8] hover:bg-[#0051D1] text-white font-semibold py-3.5 px-6 rounded-xl">
                     <span>Tambah Produk</span>
                 </a>
             </div>
@@ -22,7 +22,7 @@
                 <!-- Total Products Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-md">
                     <div class="flex items-center space-x-4">
-                        <div class="p-4 bg-blue-600 text-white rounded-xl">
+                        <div class="p-4 bg-[#0065F8] text-white rounded-xl">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -35,10 +35,26 @@
                     </div>
                 </div>
 
+                <!-- Active Products Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-4 bg-[#0065F8] text-white rounded-xl">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Produk Aktif</p>
+                            <p class="text-3xl font-bold text-gray-900">{{ count($products) }}</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Categories Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-md">
                     <div class="flex items-center space-x-4">
-                        <div class="p-4 bg-purple-600 text-white rounded-xl">
+                        <div class="p-4 bg-[#0065F8] text-white rounded-xl">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
@@ -83,7 +99,7 @@
                                     <td class="px-6 py-5 whitespace-nowrap">
                                         <div class="flex items-center space-x-4">
                                             <div
-                                                class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center">
+                                                class="w-12 h-12 bg-[#0065F8] text-white rounded-xl flex items-center justify-center">
                                                 <span class="text-lg font-bold">{{ substr($product->name, 0, 1) }}</span>
                                             </div>
                                             <div>

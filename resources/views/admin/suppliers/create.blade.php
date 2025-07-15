@@ -120,7 +120,7 @@
                     <h3 class="text-sm font-medium text-green-800">Tips Pengisian</h3>
                     <div class="text-sm text-green-700 mt-1">
                         <ul class="list-disc list-inside space-y-1">
-                            <li>Pastikan nama supplier unik dan mudah diingat</li>
+                            <li>Pastikan nama benar dan tidak ada kesalahan</li>
                             <li>Alamat yang lengkap memudahkan proses pengiriman</li>
                             <li>Kontak yang valid penting untuk komunikasi</li>
                         </ul>

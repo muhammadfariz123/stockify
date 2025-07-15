@@ -22,7 +22,7 @@
             const sidebarToggle = document.getElementById("sidebarToggle");
             const sidebar = document.getElementById("sidebar");
             const overlay = document.getElementById("overlay");
-            
+
             sidebarToggle.addEventListener("click", () => {
                 sidebar.classList.toggle("-translate-x-full");
                 overlay.classList.toggle("hidden");
@@ -42,14 +42,14 @@
                     const size = Math.max(rect.width, rect.height);
                     const x = e.clientX - rect.left - size / 2;
                     const y = e.clientY - rect.top - size / 2;
-                    
+
                     ripple.style.width = ripple.style.height = size + 'px';
                     ripple.style.left = x + 'px';
                     ripple.style.top = y + 'px';
                     ripple.classList.add('ripple');
-                    
+
                     this.appendChild(ripple);
-                    
+
                     setTimeout(() => {
                         ripple.remove();
                     }, 600);
@@ -71,7 +71,7 @@
             <!-- Decorative Elements -->
             <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
             <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full translate-y-12 -translate-x-12"></div>
-            
+
             <!-- Logo Section -->
             <div class="p-6 border-b border-emerald-600/30 flex justify-between items-center relative flex-shrink-0">
                 <div class="flex items-center space-x-4">
@@ -249,19 +249,9 @@
             <!-- Desktop Header -->
             <header class="hidden md:block bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 px-8 py-6 sticky top-0 z-10 flex-shrink-0">
                 <div class="flex justify-between items-center">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-chart-line text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl font-bold text-emerald-800">Dashboard Manajer</h1>
-                            <p class="text-gray-600 text-sm mt-1 font-medium">Kelola inventori dan stok gudang dengan mudah</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <div class="bg-gradient-to-r from-emerald-50 to-emerald-100 px-4 py-2 rounded-lg">
-                            <p class="text-emerald-700 text-sm font-medium">System Status: Active</p>
-                        </div>
+                    <div>
+                        <h1 class="text-2xl font-semibold text-[#00712D]">Dashboard Manajer</h1>
+                        <p class="text-gray-600 text-sm mt-1">Kelola inventori dan stok gudang dengan mudah</p>
                     </div>
                 </div>
             </header>
@@ -325,7 +315,7 @@
 
         /* Smooth transitions */
         * {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease-in-out;
         }
 
         /* Glass morphism effect */
@@ -350,39 +340,41 @@
 
         /* Active state for navigation */
         nav a.active {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            border-left: 4px solid #10b981;
-            color: #ffffff;
+            background-color: rgba(0, 113, 45, 0.2);
+            color: white;
+            border-left: 4px solid #00712D;
         }
 
-        /* Enhanced hover effects */
-        .hover-lift:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        /* Sidebar gradient */
+        .sidebar-gradient {
+            background: linear-gradient(180deg, #00712D 0%, #005c1e 100%);
         }
 
-        /* Gradient text */
-        .gradient-text {
-            background: linear-gradient(135deg, #10b981, #059669);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Hover Effects */
+        a:hover, button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 113, 45, 0.2);
         }
 
-        /* Loading animation */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        /* Active state on buttons and links */
+        a:active, button:active {
+            transform: scale(0.98);
+            box-shadow: none;
+            background-color: rgba(0, 113, 45, 0.3);
         }
 
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        /* Rounded corners for all menu items */
+        .rounded-md {
+            border-radius: 8px;
         }
 
-        /* Card hover effects */
-        .card-hover:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        /* Specific color for headers */
+        h1, h2 {
+            color: #00712D;
+        }
+
+        .text-emerald-100 {
+            color: #00712D;
         }
     </style>
 </body>

@@ -26,8 +26,7 @@
 
         .menu-item:hover {
             transform: translateX(4px);
-            background-color: #3B82F6;
-            /* Blue hover effect */
+            background-color: #3B82F6; /* Blue hover effect */
             color: white;
         }
 
@@ -37,15 +36,8 @@
 
         .submenu-item:hover {
             transform: translateX(2px);
-            background-color: #3B82F6;
-            /* Blue hover effect */
+            background-color: #E0F2FE; /* Light blue hover */
             color: white;
-        }
-
-        /* Submenu items hover */
-        .submenu-item:hover {
-            background-color: #E0F2FE;
-            /* Light blue hover */
         }
 
         /* Sidebar and menu icons */
@@ -91,8 +83,7 @@
         /* Logout Button */
         .logout-btn {
             transition: all 0.2s ease;
-            border-radius: 9999px;
-            /* Rounded corners */
+            border-radius: 9999px; /* Rounded corners */
         }
 
         .logout-btn:hover {
@@ -104,16 +95,14 @@
         .menu-item,
         .submenu-item,
         .logout-btn {
-            border-radius: 9999px;
-            /* Rounded corners */
+            border-radius: 9999px; /* Rounded corners */
         }
 
         /* Add border effect to sidebar items */
         .menu-item:hover,
         .submenu-item:hover {
             border-radius: 12px;
-            border: 1px solid #3B82F6;
-            /* Blue border on hover */
+            border: 1px solid #3B82F6; /* Blue border on hover */
         }
     </style>
 </head>
@@ -235,7 +224,6 @@
                     </div>
                 </div>
 
-
                 <!-- Supplier -->
                 <a href="{{ route('admin.suppliers.index') }} "
                     class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
@@ -303,7 +291,6 @@
             submenu.classList.add('hidden');
         });
     </script>
-    @stack('scripts')
 </body>
 
 </html>
