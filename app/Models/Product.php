@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    public function attributes()
+    {
+        return $this->belongsToMany(ProductAttribute::class, 'product_attribute_product');
+    }
+
+
+
 
     // Pastikan field yang sesuai ter-cast ke tipe yang benar
     protected $casts = [

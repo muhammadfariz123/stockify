@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductAttribute;
 use App\Models\Supplier;
 use App\Models\StockOpname;
 use App\Models\ActivityLog;
@@ -37,7 +38,7 @@ class AdminController extends Controller
             'products',
             'latestUsers',
             'productsCount',
-            'recentActivities'
+            'recentActivities',
         ));
     }
     // Fungsi untuk menampilkan pengaturan aplikasi
@@ -58,10 +59,13 @@ class AdminController extends Controller
     // === Produk CRUD ===
     public function index()
     {
-        $products = Product::all();
-        $products = Product::with('category', 'supplier')->get();
-        $categoriesCount = Category::count(); // Menambahkan jumlah kategori
+        // Mengambil semua produk dengan relasi kategori, supplier, dan atribut (eager loading)
+        $products = Product::with(['category', 'supplier', 'attributes'])->get();
 
+        // Menghitung jumlah kategori
+        $categoriesCount = Category::count();
+
+        // Menampilkan ke view
         return view('admin.products.index', compact('products', 'categoriesCount'));
     }
 
@@ -69,7 +73,9 @@ class AdminController extends Controller
     {
         $categories = Category::all(); // Ambil semua kategori
         $suppliers = Supplier::all(); // Ambil semua supplier
-        return view('admin.products.create', compact('categories', 'suppliers')); // Kirim kategori dan supplier ke view
+        $attributes = ProductAttribute::all();
+
+        return view('admin.products.create', compact('categories', 'suppliers', 'attributes'));
     }
 
 
@@ -142,25 +148,38 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'purchase_price' => 'required|numeric',
-            'sale_price' => 'required|numeric',  // Validasi harga jual
+            'sale_price' => 'required|numeric',
+            'stock' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
             'supplier_id' => 'required|exists:suppliers,id',
-            'description' => 'nullable|string',
-            'stock' => 'required|numeric|min:0',  // Menyimpan stok
+            'attributes' => 'array',
+            'attributes.*' => 'exists:product_attributes,id',
         ]);
 
-        // Simpan produk
-        Product::create([
-            'name' => $request->name,
-            'purchase_price' => $request->purchase_price,
-            'sale_price' => $request->sale_price,  // Menyimpan harga jual
-            'category_id' => $request->category_id,
-            'supplier_id' => $request->supplier_id,
-            'description' => $request->description,  // Menyimpan deskripsi
-            'stock' => $request->stock,  // Menyimpan stok
+        // Simpan produk ke tabel products
+        $product = Product::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'purchase_price' => $validated['purchase_price'],
+            'sale_price' => $validated['sale_price'],
+            'stock' => $validated['stock'],
+            'category_id' => $validated['category_id'],
+            'supplier_id' => $validated['supplier_id'],
+        ]);
+
+        $product->attributes()->sync($validated['attributes']);
+
+
+        // Logging aktivitas
+        \App\Models\ActivityLog::create([
+            'user_id' => \Auth::id(),
+            'role' => \Auth::user()->role ?? 'User',
+            'activity' => 'Membuat Produk',
+            'description' => 'Produk ' . $product->name . ' ditambahkan.',
         ]);
 
         return redirect()->route('admin.products.index')
@@ -178,7 +197,8 @@ class AdminController extends Controller
     {
         $categories = Category::all();  // Ambil semua kategori
         $suppliers = Supplier::all();  // Ambil semua supplier
-        return view('admin.products.edit', compact('product', 'categories', 'suppliers')); // Kirim data ke view
+        $attributes = ProductAttribute::all();
+        return view('admin.products.edit', compact('product', 'categories', 'suppliers', 'attributes')); // Kirim data ke view
     }
 
     public function update(Request $request, Product $product)
@@ -191,6 +211,8 @@ class AdminController extends Controller
             'supplier_id' => 'required|exists:suppliers,id',
             'description' => 'nullable|string',
             'stock' => 'required|numeric|min:0',
+            'attributes' => 'array', // Validasi untuk attributes
+            'attributes.*' => 'exists:product_attributes,id', // Pastikan setiap ID atribut valid
         ]);
 
         // Update produk dengan kategori yang baru
@@ -204,6 +226,14 @@ class AdminController extends Controller
             'stock' => $request->stock,
         ]);
 
+        // Sinkronkan atribut yang dipilih dengan produk
+        if ($request->has('attributes')) {
+            $product->attributes()->sync($request->input('attributes', [])); // Sync atribut yang dipilih
+        } else {
+            // Jika tidak ada atribut yang dipilih, pastikan tidak ada atribut yang terkait dengan produk ini
+            $product->attributes()->sync([]);
+        }
+        
         return redirect()->route('admin.products.index')
             ->with('success', 'Produk berhasil diperbarui.');
     }

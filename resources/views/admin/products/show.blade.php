@@ -144,6 +144,28 @@
                                 <p class="text-slate-900">{{ $product->description ?? 'Deskripsi Tidak Tersedia' }}</p>
                             </div>
                         </div>
+
+                        <!-- Product Attributes -->
+                        <div class="space-y-3 md:col-span-2">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <strong class="text-slate-700 font-semibold">Atribut Produk:</strong>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                @if($product->attributes->isEmpty())
+                                    <p class="text-slate-600">Tidak ada atribut untuk produk ini</p>
+                                @else
+                                    <ul>
+                                        @foreach($product->attributes as $attribute)
+                                            <li class="text-slate-900">{{ $attribute->name }} - {{ $attribute->value }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -87,14 +87,12 @@
 
                     <script>
                         function formatCurrency(input) {
-                            // Remove non-numeric characters and format the value
                             let value = input.value.replace(/[^0-9]/g, '');
                             let formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             input.value = formattedValue;
                         }
 
                         function formatForSubmit() {
-                            // Strip commas before submitting
                             let purchase_price = document.getElementById('purchase_price').value.replace(/\./g, '');
                             let sale_price = document.getElementById('sale_price').value.replace(/\./g, '');
                             document.getElementById('purchase_price').value = purchase_price;
@@ -136,6 +134,23 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Attributes -->
+                    <div class="px-6 py-6">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Atribut Produk</h3>
+                            <p class="text-sm text-gray-600">Pilih atribut yang sesuai untuk produk ini</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4">
+                            @foreach($attributes as $attribute)
+                                <label class="flex items-center space-x-3">
+                                    <input type="checkbox" name="attributes[]" value="{{ $attribute->id }}" {{ in_array($attribute->id, $product->attributes->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                    <span>{{ $attribute->name }} - {{ $attribute->value }}</span>
+                                </label>
+                            @endforeach
                         </div>
                     </div>
 

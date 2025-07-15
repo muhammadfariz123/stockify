@@ -35,22 +35,6 @@
                     </div>
                 </div>
 
-                <!-- Active Products Card -->
-                <div class="bg-white rounded-2xl p-6 shadow-md">
-                    <div class="flex items-center space-x-4">
-                        <div class="p-4 bg-emerald-600 text-white rounded-xl">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm font-medium text-gray-600 mb-1">Produk Aktif</p>
-                            <p class="text-3xl font-bold text-gray-900">{{ count($products) }}</p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Categories Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-md">
                     <div class="flex items-center space-x-4">
@@ -89,6 +73,7 @@
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Supplier</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Stok</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Deskripsi</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Atribut</th>
                                 <th class="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase">Aksi</th>
                             </tr>
                         </thead>
@@ -108,16 +93,34 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-5 whitespace-nowrap text-gray-600">Rp
-                                        {{ number_format($product->purchase_price, 0, ',', '.') }}</td>
+                                        {{ number_format($product->purchase_price, 0, ',', '.') }}
+                                    </td>
                                     <td class="px-6 py-5 whitespace-nowrap text-gray-600">Rp
-                                        {{ number_format($product->sale_price, 0, ',', '.') }}</td>
+                                        {{ number_format($product->sale_price, 0, ',', '.') }}
+                                    </td>
                                     <td class="px-6 py-5 whitespace-nowrap">
-                                        {{ $product->category ? $product->category->name : 'Kategori Tidak Ditemukan' }}</td>
+                                        {{ $product->category ? $product->category->name : 'Kategori Tidak Ditemukan' }}
+                                    </td>
                                     <td class="px-6 py-5 whitespace-nowrap">
-                                        {{ $product->supplier ? $product->supplier->name : 'Supplier Tidak Ditemukan' }}</td>
+                                        {{ $product->supplier ? $product->supplier->name : 'Supplier Tidak Ditemukan' }}
+                                    </td>
                                     <td class="px-6 py-5 whitespace-nowrap text-gray-600">{{ $product->stock }}</td>
                                     <td class="px-6 py-5 whitespace-nowrap text-gray-600">
-                                        {{ $product->description ?? 'Deskripsi Tidak Tersedia' }}</td>
+                                        {{ $product->description ?? 'Deskripsi Tidak Tersedia' }}
+                                    </td>
+                                    <td class="px-6 py-5 whitespace-nowrap text-gray-600">
+                                        @if($product->attributes->count())
+                                            @foreach($product->attributes as $attribute)
+                                                <span
+                                                    class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">
+                                                    {{ $attribute->name }}: {{ $attribute->value }}
+                                                </span>
+                                            @endforeach
+                                        @else
+                                            <span class="text-gray-400 text-xs">Tidak ada atribut</span>
+                                        @endif
+                                    </td>
+
                                     <td class="px-6 py-5 whitespace-nowrap text-center">
                                         <div class="flex items-center justify-center space-x-2">
                                             <a href="{{ route('admin.products.show', $product) }}"

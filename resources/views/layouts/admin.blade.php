@@ -14,16 +14,21 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* Sidebar Theme */
         .sidebar-transition {
             transition: transform 0.3s ease-in-out;
         }
 
+        /* Hover & Active Button Effects */
         .menu-item {
             transition: all 0.2s ease-in-out;
         }
 
         .menu-item:hover {
             transform: translateX(4px);
+            background-color: #3B82F6;
+            /* Blue hover effect */
+            color: white;
         }
 
         .submenu-item {
@@ -32,6 +37,24 @@
 
         .submenu-item:hover {
             transform: translateX(2px);
+            background-color: #3B82F6;
+            /* Blue hover effect */
+            color: white;
+        }
+
+        /* Submenu items hover */
+        .submenu-item:hover {
+            background-color: #E0F2FE;
+            /* Light blue hover */
+        }
+
+        /* Sidebar and menu icons */
+        .icon-rotate {
+            transition: transform 0.3s ease;
+        }
+
+        .icon-rotate.rotated {
+            transform: rotate(90deg);
         }
 
         .glass-effect {
@@ -45,20 +68,13 @@
         }
 
         .section-header:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .icon-rotate {
-            transition: transform 0.3s ease;
-        }
-
-        .icon-rotate.rotated {
-            transform: rotate(90deg);
-        }
-
+        /* Mobile Overlay */
         .mobile-overlay {
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
@@ -75,11 +91,29 @@
         /* Logout Button */
         .logout-btn {
             transition: all 0.2s ease;
+            border-radius: 9999px;
+            /* Rounded corners */
         }
 
         .logout-btn:hover {
-            background-color: #ff4d4d;
+            background-color: #FF4D4D;
             color: white;
+        }
+
+        /* Sidebar Buttons Rounded */
+        .menu-item,
+        .submenu-item,
+        .logout-btn {
+            border-radius: 9999px;
+            /* Rounded corners */
+        }
+
+        /* Add border effect to sidebar items */
+        .menu-item:hover,
+        .submenu-item:hover {
+            border-radius: 12px;
+            border: 1px solid #3B82F6;
+            /* Blue border on hover */
         }
     </style>
 </head>
@@ -108,8 +142,8 @@
             <!-- Navigation -->
             <nav class="flex-1 p-6 space-y-3 overflow-y-auto">
                 <!-- Dashboard -->
-                <a href="{{ route('admin.dashboard') }}"
-                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 font-medium border border-blue-100">
+                <a href="{{ route('admin.dashboard') }} "
+                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-500 text-blue-700 font-medium border border-blue-100">
                     <i data-feather="home" class="w-5 h-5"></i>
                     <span>Dashboard</span>
                 </a>
@@ -125,15 +159,20 @@
                         <i data-feather="chevron-right" class="w-4 h-4 icon-rotate"></i>
                     </div>
                     <div class="submenu space-y-1 pl-6" id="products-submenu">
-                        <a href="{{ route('admin.products.index') }}"
-                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="{{ route('admin.products.index') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
                             <i data-feather="list" class="w-4 h-4"></i>
                             <span>Daftar Produk</span>
                         </a>
-                        <a href="{{ route('admin.categories.index') }}"
-                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="{{ route('admin.categories.index') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
                             <i data-feather="tag" class="w-4 h-4"></i>
                             <span>Kategori Produk</span>
+                        </a>
+                        <a href="{{ route('admin.attributes.index') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
+                            <i data-feather="sliders" class="w-4 h-4"></i>
+                            <span>Atribut Produk</span>
                         </a>
                     </div>
                 </div>
@@ -149,37 +188,23 @@
                         <i data-feather="chevron-right" class="w-4 h-4 icon-rotate"></i>
                     </div>
                     <div class="submenu space-y-1 pl-6" id="stock-submenu">
-                        <a href="{{ route('admin.transactions.in') }}"
-                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="{{ route('admin.transactions.in') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
                             <i data-feather="arrow-down-circle" class="w-4 h-4 text-green-500"></i>
                             <span>Barang Masuk</span>
                         </a>
-                        <a href="{{ route('admin.transactions.out') }}"
-                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="{{ route('admin.transactions.out') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
                             <i data-feather="arrow-up-circle" class="w-4 h-4 text-red-500"></i>
                             <span>Barang Keluar</span>
                         </a>
-                        <a href="{{ route('admin.stockopname.index') }}"
-                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="{{ route('admin.stockopname.index') }} "
+                            class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
                             <i data-feather="clipboard" class="w-4 h-4 text-blue-500"></i>
                             <span>Stock Opname</span>
                         </a>
                     </div>
                 </div>
-
-                <!-- Supplier -->
-                <a href="{{ route('admin.suppliers.index') }}"
-                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
-                    <i data-feather="truck" class="w-5 h-5"></i>
-                    <span>Supplier</span>
-                </a>
-
-                <!-- Pengguna -->
-                <a href="{{ route('admin.users.index') }}"
-                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
-                    <i data-feather="users" class="w-5 h-5"></i>
-                    <span>Pengguna</span>
-                </a>
 
                 <!-- Laporan Section -->
                 <div class="space-y-2">
@@ -192,17 +217,17 @@
                         <i data-feather="chevron-right" class="w-4 h-4 icon-rotate"></i>
                     </div>
                     <div class="submenu space-y-1 pl-6" id="reports-submenu">
-                        <a href="{{ route('admin.reports.stock') }}"
+                        <a href="{{ route('admin.reports.stock') }} "
                             class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i data-feather="package" class="w-4 h-4"></i>
                             <span>Laporan Stok</span>
                         </a>
-                        <a href="{{ route('admin.reports.transactions') }}"
+                        <a href="{{ route('admin.reports.transactions') }} "
                             class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i data-feather="activity" class="w-4 h-4"></i>
                             <span>Laporan Transaksi</span>
                         </a>
-                        <a href="{{ route('admin.reports.activity') }}"
+                        <a href="{{ route('admin.reports.activity') }} "
                             class="submenu-item flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i data-feather="clock" class="w-4 h-4"></i>
                             <span>Laporan Aktivitas</span>
@@ -210,13 +235,22 @@
                     </div>
                 </div>
 
-                <!-- Pengaturan -->
-                <a href="{{ route('admin.settings.index') }}"
-                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900">
-                    <i data-feather="settings" class="w-5 h-5"></i>
-                    <span>Pengaturan Aplikasi</span>
+
+                <!-- Supplier -->
+                <a href="{{ route('admin.suppliers.index') }} "
+                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
+                    <i data-feather="truck" class="w-5 h-5"></i>
+                    <span>Supplier</span>
                 </a>
-                <!-- Tombol Logout -->
+
+                <!-- Pengguna -->
+                <a href="{{ route('admin.users.index') }} "
+                    class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-blue-100 hover:text-blue-600">
+                    <i data-feather="users" class="w-5 h-5"></i>
+                    <span>Pengguna</span>
+                </a>
+
+                <!-- Logout -->
                 <form action="{{ route('admin.logout') }}" method="POST"
                     class="logout-btn flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:text-white font-medium border border-red-500">
                     @csrf
@@ -240,30 +274,7 @@
     </div>
 
     <script>
-        // Initialize Feather Icons
-        feather.replace();
-
-        // Mobile Sidebar Toggle
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const closeSidebar = document.getElementById('closeSidebar');
-        const mobileSidebar = document.getElementById('mobileSidebar');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-
-        function openMobileSidebar() {
-            mobileSidebar.classList.remove('-translate-x-full');
-            mobileOverlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMobileSidebar() {
-            mobileSidebar.classList.add('-translate-x-full');
-            mobileOverlay.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        toggleSidebar.addEventListener('click', openMobileSidebar);
-        closeSidebar.addEventListener('click', closeMobileSidebar);
-        mobileOverlay.addEventListener('click', closeMobileSidebar);
+        feather.replace(); // Initialize Feather Icons
 
         // Submenu Toggle Function
         function toggleSubmenu(sectionName) {
@@ -290,18 +301,6 @@
         // Initialize submenus as hidden
         document.querySelectorAll('.submenu').forEach(submenu => {
             submenu.classList.add('hidden');
-        });
-
-        // Close mobile sidebar when clicking on links
-        document.querySelectorAll('#mobileSidebar a').forEach(link => {
-            link.addEventListener('click', closeMobileSidebar);
-        });
-
-        // Handle escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closeMobileSidebar();
-            }
         });
     </script>
     @stack('scripts')

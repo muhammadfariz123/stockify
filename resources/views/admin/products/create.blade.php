@@ -6,9 +6,11 @@
             <!-- Header Section -->
             <div class="mb-8">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                     </div>
                     <div>
@@ -24,7 +26,9 @@
                 <div class="bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-6">
                     <h2 class="text-xl font-semibold text-white flex items-center space-x-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
                         </svg>
                         <span>Informasi Produk</span>
                     </h2>
@@ -35,14 +39,15 @@
                     <form action="{{ route('admin.products.store') }}" method="POST" class="space-y-8">
                         @csrf
 
-                        <!-- Basic Information Section -->
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            <!-- Nama Produk -->
                             <div class="space-y-2">
                                 <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
                                     <span class="flex items-center space-x-2">
-                                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                                            </path>
                                         </svg>
                                         <span>Nama Produk</span>
                                         <span class="text-red-500">*</span>
@@ -53,12 +58,14 @@
                                     placeholder="Masukkan nama produk" required>
                             </div>
 
-                            <!-- Harga Produk -->
                             <div class="space-y-2">
                                 <label for="purchase_price" class="block text-sm font-semibold text-gray-700 mb-2">
                                     <span class="flex items-center space-x-2">
-                                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                        <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+                                            </path>
                                         </svg>
                                         <span>Harga Produk</span>
                                         <span class="text-red-500">*</span>
@@ -70,14 +77,15 @@
                             </div>
                         </div>
 
-                        <!-- Price Section -->
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            <!-- Harga Jual -->
                             <div class="space-y-2">
                                 <label for="sale_price" class="block text-sm font-semibold text-gray-700 mb-2">
                                     <span class="flex items-center space-x-2">
-                                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z">
+                                            </path>
                                         </svg>
                                         <span>Harga Jual</span>
                                         <span class="text-red-500">*</span>
@@ -88,12 +96,14 @@
                                     placeholder="Masukkan harga jual produk" required>
                             </div>
 
-                            <!-- Kategori Produk -->
                             <div class="space-y-2">
                                 <label for="category_id" class="block text-sm font-semibold text-gray-700 mb-2">
                                     <span class="flex items-center space-x-2">
-                                        <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                        <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                            </path>
                                         </svg>
                                         <span>Kategori Produk</span>
                                         <span class="text-red-500">*</span>
@@ -110,12 +120,14 @@
                             </div>
                         </div>
 
-                        <!-- Supplier Section -->
                         <div class="space-y-2">
                             <label for="supplier_id" class="block text-sm font-semibold text-gray-700 mb-2">
                                 <span class="flex items-center space-x-2">
-                                    <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
                                     </svg>
                                     <span>Supplier Produk</span>
                                     <span class="text-red-500">*</span>
@@ -131,12 +143,14 @@
                             </select>
                         </div>
 
-                        <!-- Stok Section -->
                         <div class="space-y-2">
                             <label for="stock" class="block text-sm font-semibold text-gray-700 mb-2">
                                 <span class="flex items-center space-x-2">
-                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
                                     </svg>
                                     <span>Stok</span>
                                     <span class="text-red-500">*</span>
@@ -147,28 +161,50 @@
                                 placeholder="Masukkan jumlah stok produk" required>
                         </div>
 
-                        <!-- Deskripsi Produk -->
                         <div class="space-y-2">
                             <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
                                 <span class="flex items-center space-x-2">
-                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
                                     </svg>
                                     <span>Deskripsi Produk</span>
                                 </span>
                             </label>
                             <textarea id="description" name="description" rows="4"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white resize-none"
-                                placeholder="Masukkan atribut produk (misalnya: ukuran, warna, berat)"></textarea>
+                                placeholder="Masukkan deskripsi produk (opsional)"></textarea>
                         </div>
 
-                        <!-- Submit Button -->
+
+                        <div class="mb-4">
+                            <label class="block font-semibold mb-2">Pilih Atribut Produk</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                @forelse($attributes as $attribute)
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" name="attributes[]" value="{{ $attribute->id }}"
+                                            class="form-checkbox text-indigo-600 rounded">
+                                        <span>{{ $attribute->name }}: {{ $attribute->value }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-sm text-gray-500">Belum ada atribut dibuat. <a
+                                            href="{{ route('admin.attributes.create') }}" class="text-blue-600 underline">Buat
+                                            Atribut</a></p>
+                                @endforelse
+                            </div>
+                        </div>
+
+
+
                         <div class="pt-6 border-t border-gray-100">
                             <button type="submit"
                                 class="w-full py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl shadow-lg hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl font-semibold text-lg">
                                 <span class="flex items-center justify-center space-x-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     <span>Simpan Produk</span>
                                 </span>
@@ -180,3 +216,22 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        let attrIndex = 1;
+        document.getElementById('add-attribute').addEventListener('click', () => {
+            const container = document.getElementById('attributes-container');
+            const html = `
+                            <div class="flex gap-2 mt-2">
+                                <input type="text" name="attributes[${attrIndex}][name]" placeholder="Nama Atribut"
+                                    class="w-1/2 px-4 py-2 border border-gray-300 rounded" />
+                                <input type="text" name="attributes[${attrIndex}][value]" placeholder="Nilai"
+                                    class="w-1/2 px-4 py-2 border border-gray-300 rounded" />
+                            </div>
+                        `;
+            container.insertAdjacentHTML('beforeend', html);
+            attrIndex++;
+        });
+    </script>
+@endpush

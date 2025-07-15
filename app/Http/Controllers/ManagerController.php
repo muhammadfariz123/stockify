@@ -36,11 +36,17 @@ class ManagerController extends Controller
         return view('manager.stock', compact('transactions'));
     }
 
-    // Method untuk menampilkan produk
+        // Menampilkan daftar produk
     public function products()
     {
         $products = Product::with('category', 'supplier')->get();
-        return view('manager.products', compact('products'));
+        return view('manager.products.index', compact('products'));
+    }
+
+    // Menampilkan detail produk
+    public function showProduct(Product $product)
+    {
+        return view('manager.products.show', compact('product'));
     }
 
     // Method untuk menambahkan produk
@@ -64,19 +70,6 @@ class ManagerController extends Controller
     public function suppliers()
     {
         $suppliers = Supplier::all();
-        return view('manager.suppliers', compact('suppliers'));
-    }
-
-    // Method untuk laporan
-    public function reports()
-    {
-        $reportData = Transaction::with('product')->get();
-        return view('manager.reports', compact('reportData'));
-    }
-
-    public function showStock()
-    {
-        $products = Product::all();
-        return view('manager.stock', compact('products'));
+        return view('manager.suppliers.index', compact('suppliers'));
     }
 }

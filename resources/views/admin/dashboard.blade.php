@@ -94,8 +94,7 @@
             </div>
         </div>
 
-        <!-- Chart Section -->
-        <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl mb-8 border border-white/50">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-8 border border-white/50">
             <div class="flex items-center justify-between mb-8">
                 <div class="space-y-2">
                     <h3 class="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
@@ -117,6 +116,47 @@
             </div>
             <div class="bg-gradient-to-br from-indigo-50/50 to-purple-50/50 rounded-2xl p-6 border border-indigo-100/50">
                 <canvas id="stockChart" class="w-full h-80"></canvas>
+
+                @push('scripts')
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const ctx = document.getElementById('stockChart').getContext('2d');
+
+                            const data = {
+                                labels: {!! json_encode($products->pluck('name')) !!},
+                                datasets: [{
+                                    label: 'Jumlah Stok',
+                                    data: {!! json_encode($products->pluck('stock')) !!},
+                                    backgroundColor: 'rgba(99, 102, 241, 0.5)', // indigo-500
+                                    borderColor: 'rgba(99, 102, 241, 1)',
+                                    borderWidth: 2,
+                                    borderRadius: 6
+                                }]
+                            };
+
+                            const options = {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            precision: 0
+                                        }
+                                    }
+                                }
+                            };
+
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: data,
+                                options: options
+                            });
+                        });
+                    </script>
+                @endpush
+
             </div>
         </div>
 
@@ -238,46 +278,6 @@
 
     </div>
 @endsection
-
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ctx = document.getElementById('stockChart').getContext('2d');
-
-            const data = {
-                labels: {!! json_encode($products->pluck('name')) !!},
-                datasets: [{
-                    label: 'Jumlah Stok',
-                    data: {!! json_encode($products->pluck('stock')) !!},
-                    backgroundColor: 'rgba(99, 102, 241, 0.5)', // indigo-500
-                    borderColor: 'rgba(99, 102, 241, 1)',
-                    borderWidth: 2,
-                    borderRadius: 6
-                }]
-            };
-
-            const options = {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0
-                        }
-                    }
-                }
-            };
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: data,
-                options: options
-            });
-        });
-    </script>
-@endpush
 
 
 <style>
