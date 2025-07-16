@@ -144,17 +144,31 @@ Route::prefix('manager')
 
 
 // ========== STAFF GUDANG ==========
-
 Route::prefix('staff')
     ->name('staff.')
     ->middleware(['auth', 'role:Staff Gudang'])
     ->group(function () {
-        Route::get('dashboard', [StaffController::class, 'dashboard'])->name('dashboard');
-        Route::post('stock/in', [StaffController::class, 'receiveStock'])->name('receiveStock');
-        Route::post('stock/out', [StaffController::class, 'dispatchStock'])->name('dispatchStock');
-        // Pastikan rute ini ada untuk staff stock
-        Route::get('stock', [StaffController::class, 'showStock'])->name('stock.index');
+        // Rute Dashboard Staff Gudang
+        Route::get('/dashboard', [StaffController::class, 'dashboard'])->name('dashboard');
+
+        // Rute untuk menampilkan daftar produk
+        Route::get('/products', [StaffController::class, 'products'])->name('products.index');
+
+        // Rute untuk menampilkan halaman tambah produk
+        Route::get('/product/create', [StaffController::class, 'tambahProdukForm'])->name('product.create');
+
+        // Rute untuk menyimpan produk
+        Route::post('/product/store', [StaffController::class, 'store'])->name('product.store');
+
+        // Konfirmasi Barang Masuk
+        Route::get('/stock/in', [StaffController::class, 'konfirmasiBarangMasuk'])->name('stock.in');
+        Route::post('/stock/in/{id}/confirm', [StaffController::class, 'konfirmasiBarangMasukAction'])->name('stock.confirm');
+
+        // Konfirmasi Barang Keluar
+        Route::get('/stock/out', [StaffController::class, 'konfirmasiBarangKeluar'])->name('stock.out');
+        Route::post('/stock/out/{id}/send', [StaffController::class, 'konfirmasiBarangKeluarAction'])->name('stock.send');
+
+        // Logout
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
-
 require __DIR__ . '/auth.php';

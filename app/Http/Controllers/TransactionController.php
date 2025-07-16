@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\Supplier;
-use App\Models\ActivityLog; // ✅ Tambahkan
-use Illuminate\Support\Facades\Auth; // ✅ Tambahkan
+use App\Models\ActivityLog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -47,12 +47,13 @@ class TransactionController extends Controller
             'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
-        // Catat transaksi masuk
-        Transaction::create([
+        // Catat transaksi masuk dengan status 'pending'
+        $transaction = Transaction::create([
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
             'supplier_id' => $request->supplier_id,
             'type' => 'in',
+            'status' => 'pending',  // Status 'pending' sampai dikonfirmasi oleh staff
         ]);
 
         // Update stok produk
@@ -65,10 +66,10 @@ class TransactionController extends Controller
             'user_id' => Auth::id(),
             'role' => Auth::user()->role ?? 'User',
             'activity' => 'Barang Masuk',
-            'description' => 'Barang masuk: ' . $request->quantity . ' unit ke produk "' . $product->name . '".',
+            'description' => 'Barang masuk: ' . $request->quantity . ' unit ke produk "' . $transaction->product->name . '". Menunggu konfirmasi dari staff.',
         ]);
 
-        return redirect()->route('manager.transactions.in')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('manager.transactions.in')->with('success', 'Barang berhasil ditambahkan dan menunggu konfirmasi.');
     }
 
     // Menyimpan transaksi barang keluar
@@ -79,11 +80,12 @@ class TransactionController extends Controller
             'quantity' => 'required|numeric|min:1',
         ]);
 
-        // Catat transaksi keluar
-        Transaction::create([
+        // Catat transaksi keluar dengan status 'pending'
+        $transaction = Transaction::create([
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
             'type' => 'out',
+            'status' => 'pending',  // Status 'pending' sampai dikonfirmasi oleh staff
         ]);
 
         // Update stok produk
@@ -96,9 +98,56 @@ class TransactionController extends Controller
             'user_id' => Auth::id(),
             'role' => Auth::user()->role ?? 'User',
             'activity' => 'Barang Keluar',
-            'description' => 'Barang keluar: ' . $request->quantity . ' unit dari produk "' . $product->name . '".',
+            'description' => 'Barang keluar: ' . $request->quantity . ' unit dari produk "' . $transaction->product->name . '". Menunggu konfirmasi dari staff.',
         ]);
 
-        return redirect()->route('manager.transactions.out')->with('success', 'Barang berhasil dikeluarkan');
+        return redirect()->route('manager.transactions.out')->with('success', 'Barang berhasil ditambahkan dan menunggu konfirmasi.');
+    }
+
+
+    // Konfirmasi Barang Masuk
+    public function confirmIncoming($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->status = 'confirmed';  // Ubah status menjadi 'confirmed'
+        $transaction->save();
+
+        // Update stok produk setelah konfirmasi
+        $product = Product::findOrFail($transaction->product_id);
+        $product->stock += $transaction->quantity;  // Menambahkan jumlah ke stok
+        $product->save();
+
+        // ✅ Logging aktivitas konfirmasi barang masuk
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Konfirmasi Barang Masuk',
+            'description' => 'Transaksi barang masuk ' . $transaction->id . ' telah dikonfirmasi dan stok produk "' . $product->name . '" diperbarui.',
+        ]);
+
+        return redirect()->route('staff.stock.in')->with('success', 'Barang masuk berhasil dikonfirmasi.');
+    }
+
+    // Konfirmasi Barang Keluar
+    public function confirmOutgoing($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->status = 'confirmed';  // Ubah status menjadi 'confirmed'
+        $transaction->save();
+
+        // Update stok produk setelah konfirmasi
+        $product = Product::findOrFail($transaction->product_id);
+        $product->stock -= $transaction->quantity;  // Mengurangi jumlah stok produk
+        $product->save();
+
+        // ✅ Logging aktivitas konfirmasi barang keluar
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Konfirmasi Barang Keluar',
+            'description' => 'Transaksi barang keluar ' . $transaction->id . ' telah dikonfirmasi dan stok produk "' . $product->name . '" diperbarui.',
+        ]);
+
+        return redirect()->route('staff.stock.out')->with('success', 'Barang keluar berhasil dikonfirmasi.');
     }
 }
