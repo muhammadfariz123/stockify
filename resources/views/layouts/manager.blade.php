@@ -36,7 +36,7 @@
             // Add ripple effect to buttons
             const rippleButtons = document.querySelectorAll('.ripple-btn');
             rippleButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     const ripple = document.createElement('span');
                     const rect = this.getBoundingClientRect();
                     const size = Math.max(rect.width, rect.height);
@@ -69,13 +69,18 @@
             class="fixed md:relative z-30 w-72 bg-gradient-to-br from-emerald-800 via-emerald-700 to-emerald-900 shadow-2xl flex flex-col transform transition-all duration-300 ease-in-out md:translate-x-0 -translate-x-full backdrop-blur-lg h-screen">
 
             <!-- Decorative Elements -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-            <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full translate-y-12 -translate-x-12"></div>
+            <div
+                class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full -translate-y-16 translate-x-16">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full translate-y-12 -translate-x-12">
+            </div>
 
             <!-- Logo Section -->
             <div class="p-6 border-b border-emerald-600/30 flex justify-between items-center relative flex-shrink-0">
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-white to-emerald-50 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-white to-emerald-50 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
                         <i class="fas fa-boxes text-emerald-700 text-xl"></i>
                     </div>
                     <div>
@@ -84,17 +89,20 @@
                     </div>
                 </div>
                 <!-- Mobile Close Button -->
-                <button id="sidebarToggle" class="md:hidden text-white text-xl focus:outline-none hover:bg-white/10 rounded-lg p-2 transition-all">
+                <button id="sidebarToggle"
+                    class="md:hidden text-white text-xl focus:outline-none hover:bg-white/10 rounded-lg p-2 transition-all">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
 
             <!-- Navigation Menu -->
-            <nav class="p-4 space-y-3 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-600 scrollbar-track-emerald-800">
+            <nav
+                class="p-4 space-y-3 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-600 scrollbar-track-emerald-800">
                 <!-- Dashboard Menu -->
                 <a href="{{ route('manager.dashboard') }}"
                     class="flex items-center space-x-4 text-white hover:text-emerald-100 hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 px-4 py-4 rounded-xl transition-all duration-300 ease-in-out group transform hover:scale-[1.02] hover:shadow-lg active:bg-emerald-600/30 active:scale-95 ripple-btn relative overflow-hidden">
-                    <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                         <i class="fas fa-chart-line text-white"></i>
                     </div>
                     <div>
@@ -108,7 +116,8 @@
                     <div class="font-semibold text-white cursor-pointer flex justify-between items-center px-4 py-3 hover:bg-white/10 rounded-xl transition-all duration-300 group"
                         data-toggle="#produkSubmenu">
                         <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                                 <i class="fas fa-cube text-white"></i>
                             </div>
                             <div>
@@ -121,7 +130,8 @@
                     <div id="produkSubmenu" class="ml-6 space-y-2 hidden">
                         <a href="{{ route('manager.products.index') }}"
                             class="flex items-center space-x-3 py-3 px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group">
-                            <div class="w-2 h-2 bg-emerald-400 rounded-full group-hover:scale-150 transition-transform"></div>
+                            <div class="w-2 h-2 bg-emerald-400 rounded-full group-hover:scale-150 transition-transform">
+                            </div>
                             <span class="text-sm font-medium">Daftar Produk</span>
                         </a>
                     </div>
@@ -132,7 +142,8 @@
                     <div class="font-semibold text-white cursor-pointer flex justify-between items-center px-4 py-3 hover:bg-white/10 rounded-xl transition-all duration-300 group"
                         data-toggle="#stokSubmenu">
                         <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                                 <i class="fas fa-warehouse text-white"></i>
                             </div>
                             <div>
@@ -145,17 +156,20 @@
                     <div id="stokSubmenu" class="ml-6 space-y-2 hidden">
                         <a href="{{ route('manager.transactions.in') }}"
                             class="flex items-center space-x-3 py-3 px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group">
-                            <div class="w-2 h-2 bg-green-400 rounded-full group-hover:scale-150 transition-transform"></div>
+                            <div class="w-2 h-2 bg-green-400 rounded-full group-hover:scale-150 transition-transform">
+                            </div>
                             <span class="text-sm font-medium">Barang Masuk</span>
                         </a>
                         <a href="{{ route('manager.transactions.out') }}"
                             class="flex items-center space-x-3 py-3 px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group">
-                            <div class="w-2 h-2 bg-red-400 rounded-full group-hover:scale-150 transition-transform"></div>
+                            <div class="w-2 h-2 bg-red-400 rounded-full group-hover:scale-150 transition-transform">
+                            </div>
                             <span class="text-sm font-medium">Barang Keluar</span>
                         </a>
                         <a href="{{ route('manager.stockopname.index') }}"
                             class="flex items-center space-x-3 py-3 px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group">
-                            <div class="w-2 h-2 bg-yellow-400 rounded-full group-hover:scale-150 transition-transform"></div>
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full group-hover:scale-150 transition-transform">
+                            </div>
                             <span class="text-sm font-medium">Stock Opname</span>
                         </a>
                     </div>
@@ -164,7 +178,8 @@
                 <!-- Supplier Menu -->
                 <a href="{{ route('manager.suppliers.index') }}"
                     class="flex items-center space-x-4 text-white hover:text-emerald-100 hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 px-4 py-4 rounded-xl transition-all duration-300 ease-in-out group transform hover:scale-[1.02] hover:shadow-lg active:bg-emerald-600/30 active:scale-95 ripple-btn relative overflow-hidden">
-                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                         <i class="fas fa-truck text-white"></i>
                     </div>
                     <div>
@@ -178,7 +193,8 @@
                     <div class="font-semibold text-white cursor-pointer flex justify-between items-center px-4 py-3 hover:bg-white/10 rounded-xl transition-all duration-300 group"
                         data-toggle="#laporanSubmenu">
                         <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                                 <i class="fas fa-chart-bar text-white"></i>
                             </div>
                             <div>
@@ -191,12 +207,14 @@
                     <div id="laporanSubmenu" class="ml-6 space-y-2 hidden">
                         <a href="{{ route('manager.reports.stock') }}"
                             class="flex items-center space-x-3 py-3 px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group">
-                            <div class="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-150 transition-transform"></div>
+                            <div class="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-150 transition-transform">
+                            </div>
                             <span class="text-sm font-medium">Laporan Stok</span>
                         </a>
                         <a href="{{ route('manager.reports.transactions') }}"
                             class="flex items-center space-x-3 py-3 px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group">
-                            <div class="w-2 h-2 bg-purple-400 rounded-full group-hover:scale-150 transition-transform"></div>
+                            <div class="w-2 h-2 bg-purple-400 rounded-full group-hover:scale-150 transition-transform">
+                            </div>
                             <span class="text-sm font-medium">Laporan Transaksi</span>
                         </a>
                     </div>
@@ -204,9 +222,11 @@
             </nav>
 
             <!-- User Profile & Logout Section -->
-            <div class="p-4 border-t border-emerald-600/30 bg-gradient-to-r from-emerald-800/50 to-emerald-900/50 backdrop-blur-sm flex-shrink-0">
+            <div
+                class="p-4 border-t border-emerald-600/30 bg-gradient-to-r from-emerald-800/50 to-emerald-900/50 backdrop-blur-sm flex-shrink-0">
                 <div class="flex items-center space-x-4 px-4 py-4 mb-4 bg-white/5 rounded-xl backdrop-blur-sm">
-                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
                         <i class="fas fa-user text-white text-lg"></i>
                     </div>
                     <div>
@@ -219,7 +239,8 @@
                     @csrf
                     <button type="submit"
                         class="w-full flex items-center space-x-4 text-white hover:text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-red-600 px-4 py-4 rounded-xl transition-all duration-300 ease-in-out group transform hover:scale-[1.02] hover:shadow-lg active:bg-red-700 active:scale-95 ripple-btn relative overflow-hidden">
-                        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                             <i class="fas fa-sign-out-alt text-white"></i>
                         </div>
                         <div>
@@ -234,12 +255,15 @@
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col h-screen">
             <!-- Mobile Header -->
-            <header class="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 px-6 py-4 md:hidden flex justify-between items-center sticky top-0 z-10 flex-shrink-0">
-                <button id="sidebarToggle" class="text-emerald-700 text-xl focus:outline-none hover:bg-emerald-50 rounded-lg p-2 transition-all">
+            <header
+                class="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 px-6 py-4 md:hidden flex justify-between items-center sticky top-0 z-10 flex-shrink-0">
+                <button id="sidebarToggle"
+                    class="text-emerald-700 text-xl focus:outline-none hover:bg-emerald-50 rounded-lg p-2 transition-all">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
                         <i class="fas fa-chart-line text-white text-sm"></i>
                     </div>
                     <h1 class="text-xl font-bold text-emerald-800">Dashboard</h1>
@@ -247,7 +271,8 @@
             </header>
 
             <!-- Desktop Header -->
-            <header class="hidden md:block bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 px-8 py-6 sticky top-0 z-10 flex-shrink-0">
+            <header
+                class="hidden md:block bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 px-8 py-6 sticky top-0 z-10 flex-shrink-0">
                 <div class="flex justify-between items-center">
                     <div>
                         <h1 class="text-2xl font-semibold text-[#00712D]">Dashboard Manajer</h1>
@@ -351,13 +376,15 @@
         }
 
         /* Hover Effects */
-        a:hover, button:hover {
+        a:hover,
+        button:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0, 113, 45, 0.2);
         }
 
         /* Active state on buttons and links */
-        a:active, button:active {
+        a:active,
+        button:active {
             transform: scale(0.98);
             box-shadow: none;
             background-color: rgba(0, 113, 45, 0.3);
@@ -369,7 +396,8 @@
         }
 
         /* Specific color for headers */
-        h1, h2 {
+        h1,
+        h2 {
             color: #00712D;
         }
 

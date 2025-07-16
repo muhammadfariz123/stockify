@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ProductManagerController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\CategoryController; // Pastikan ini sudah diimport
 use App\Http\Controllers\StockOpnameController; // Pastikan ini sudah diimport
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\SupplierController; // Pastikan ini sudah diimport
-use App\Http\Controllers\ProductController;  // Import ProductController
 use App\Http\Controllers\ReportController;  // Import ReportController
 use App\Http\Controllers\TransactionController;  // Import ReportController
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -106,16 +106,24 @@ Route::prefix('manager')
     ->middleware(['auth', 'role:Manajer Gudang']) // Menggunakan middleware role
     ->group(function () {
         Route::get('dashboard', [ManagerController::class, 'index'])->name('dashboard');
-        Route::get('products', [ProductController::class, 'index'])->name('products.index');
-        // Route untuk menampilkan detail produk
-        Route::get('products/{product}', [ManagerController::class, 'showProduct'])->name('products.show');
+
+
+
+        // PRODUCTS
+        Route::resource('products', ProductManagerController::class);
+
+
+        // TRANSACTIONS
         Route::get('transactions/in', [TransactionController::class, 'showIncomingForm'])->name('transactions.in');
         Route::post('transactions/in', [TransactionController::class, 'storeIncoming'])->name('transactions.store.in');
         Route::get('transactions/out', [TransactionController::class, 'showOutgoingForm'])->name('transactions.out');
         Route::post('transactions/out', [TransactionController::class, 'storeOutgoing'])->name('transactions.store.out');
+
+        // STOCKOPNAME
         Route::get('stockopname', [StockOpnameController::class, 'index'])->name('stockopname.index');
         Route::post('stockopname', [StockOpnameController::class, 'store'])->name('stockopname.store');
 
+        // REPORTS
         Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
 
 
