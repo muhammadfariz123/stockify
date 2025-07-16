@@ -114,15 +114,6 @@
                             
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Tidak ada kategori</h3>
                             <p class="text-gray-500 mb-8 leading-relaxed">Mulai dengan menambahkan kategori pertama Anda untuk mengorganisir produk dengan lebih baik.</p>
-                            
-
-                            <a href="{{ route('admin.categories.create') }}" 
-                               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#0065F8] to-[#0048c1] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 gap-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                </svg>
-                                Tambah Kategori Pertama
-                            </a>
                         </div>
                     </div>
                 @endif
