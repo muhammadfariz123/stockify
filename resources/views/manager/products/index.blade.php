@@ -8,7 +8,7 @@
                 <h1 class="text-3xl font-bold text-gray-900">Daftar Produk</h1>
                 <p class="text-gray-600 text-sm">Kelola semua produk dengan mudah dan efisien</p>
             </div>
-            <a href="{{ route('manager.products.create') }}" class="bg-blue-600 text-white py-3 px-6 rounded-xl">
+            <a href="{{ route('manager.products.create') }}" class="bg-[#00712D] text-white py-3 px-6 rounded-xl">
                 Tambah Produk
             </a>
         </div>
@@ -49,7 +49,8 @@
                                 <td class="px-6 py-5">
                                     @if($product->attributes->count())
                                         @foreach($product->attributes as $attribute)
-                                            <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">
+                                            <span
+                                                class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">
                                                 {{ $attribute->name }}: {{ $attribute->value }}
                                             </span>
                                         @endforeach
@@ -58,16 +59,23 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-5 text-center">
-                                    <div class="flex justify-center space-x-3">
-                                        <a href="{{ route('manager.products.show', $product) }}" class="text-blue-600 text-xs">Lihat</a>
-                                        <a href="{{ route('manager.products.edit', $product) }}" class="text-yellow-600 text-xs">Edit</a>
-                                        <form action="{{ route('manager.products.destroy', $product) }}" method="POST" class="inline">
+                                    <div class="flex justify-center items-center space-x-3">
+                                        <a href="{{ route('manager.products.show', $product) }}"
+                                            class="text-blue-600 text-xs">Lihat</a>
+                                        <a href="{{ route('manager.products.edit', $product) }}"
+                                            class="text-yellow-600 text-xs">Edit</a>
+                                        <form action="{{ route('manager.products.destroy', $product) }}" method="POST"
+                                            class="inline-flex">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 text-xs" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</button>
+                                            <button type="submit" class="text-red-600 text-xs"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

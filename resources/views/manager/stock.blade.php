@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container mx-auto p-6">
-        <h1 class="text-xl font-bold mb-4">Manajer Gudang - Manajemen Stok</h1>
+        <h1 class="text-xl font-bold mb-4">Manager Gudang - Manajemen Stok</h1>
 
         <!-- Daftar Stok Barang -->
         <table class="table-auto w-full border-collapse border border-gray-300">

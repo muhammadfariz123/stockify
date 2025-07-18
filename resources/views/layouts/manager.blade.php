@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajer Gudang Dashboard - Stockify</title>
+    <title>Manager Gudang Dashboard - Stockify</title>
     @vite('resources/css/app.css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script>
@@ -275,7 +275,7 @@
                 class="hidden md:block bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 px-8 py-6 sticky top-0 z-10 flex-shrink-0">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-2xl font-semibold text-[#00712D]">Dashboard Manajer</h1>
+                        <h1 class="text-2xl font-semibold text-black">Dashboard Manager</h1>
                         <p class="text-gray-600 text-sm mt-1">Kelola inventori dan stok gudang dengan mudah</p>
                     </div>
                 </div>
