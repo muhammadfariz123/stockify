@@ -90,6 +90,7 @@
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Stok</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Deskripsi</th>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase">Atribut</th>
+                                
                                 <th class="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase">Aksi</th>
                             </tr>
                         </thead>
@@ -137,6 +138,7 @@
                                         @endif
                                     </td>
 
+                                
                                     <td class="px-6 py-5 whitespace-nowrap text-center">
                                         <div class="flex items-center justify-center space-x-2">
                                             <a href="{{ route('admin.products.show', $product) }}"

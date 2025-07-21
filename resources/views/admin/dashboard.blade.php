@@ -6,7 +6,8 @@
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div class="space-y-2">
-                    <h1 class="text-4xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+                    <h1
+                        class="text-4xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                         Dashboard Admin
                     </h1>
                     <p class="text-gray-600 text-lg">Selamat datang kembali! Berikut adalah ringkasan aktivitas hari ini.
@@ -28,8 +29,11 @@
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <!-- Products Card -->
-            <div class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-blue-300/50 hover:translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div
+                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-blue-300/50 hover:translate-y-2">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
                 <div class="relative z-10">
                     <div class="flex items-center justify-between mb-6">
                         <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-2xl shadow-lg">
@@ -47,16 +51,19 @@
             </div>
 
             <!-- Incoming Transactions -->
-            <div class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-green-300/50 hover:translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div
+                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-green-300/50 hover:translate-y-2">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
                 <div class="relative z-10">
                     <div class="flex items-center justify-between mb-6">
                         <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl shadow-lg">
                             <i class="fas fa-arrow-down text-white text-2xl"></i>
                         </div>
                         <div class="text-right">
-                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $incomingTransactions }}</p>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi</p>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $totalIncomingTransactions }}</p>
+                            <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi Masuk</p>
                         </div>
                     </div>
                     <div class="border-t border-gray-100 pt-4">
@@ -66,16 +73,19 @@
             </div>
 
             <!-- Outgoing Transactions -->
-            <div class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-red-300/50 hover:translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div
+                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-red-300/50 hover:translate-y-2">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
                 <div class="relative z-10">
                     <div class="flex items-center justify-between mb-6">
                         <div class="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-2xl shadow-lg">
                             <i class="fas fa-arrow-up text-white text-2xl"></i>
                         </div>
                         <div class="text-right">
-                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $outgoingTransactions }}</p>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi</p>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $totalOutgoingTransactions }}</p>
+                            <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi Keluar</p>
                         </div>
                     </div>
                     <div class="border-t border-gray-100 pt-4">
@@ -83,13 +93,35 @@
                     </div>
                 </div>
             </div>
+            <!-- Low Stock Warning Card -->
+            <div
+                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-yellow-300/50 hover:translate-y-2">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-amber-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="bg-gradient-to-br from-yellow-400 to-amber-500 p-4 rounded-2xl shadow-lg">
+                            <i class="fas fa-triangle-exclamation text-white text-2xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $lowStockCount }}</p>
+                            <p class="text-sm text-gray-500 uppercase tracking-wider">Stok Rendah</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-100 pt-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Produk Di Bawah Minimum</h3>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Chart Section -->
+        <!-- Grafik Stok Barang -->
         <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg mb-8 border border-white/50">
             <div class="flex items-center justify-between mb-8">
                 <div class="space-y-2">
-                    <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+                    <h3
+                        class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                         Grafik Stok Barang
                     </h3>
                     <p class="text-gray-600 text-lg">Visualisasi data stok produk dalam gudang</p>
@@ -137,14 +169,14 @@
                         });
                     </script>
                 @endpush
-
             </div>
         </div>
 
         {{-- Pengguna Baru --}}
         <div class="space-y-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+                <h3
+                    class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                     Pengguna Baru Bergabung
                 </h3>
                 <div class="flex items-center space-x-2">
@@ -208,7 +240,8 @@
         {{-- Aktivitas Terbaru --}}
         <div class="space-y-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+                <h3
+                    class="text-3xl font-extrabold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                     Aktivitas Pengguna Terakhir
                 </h3>
                 <div class="flex items-center space-x-2">

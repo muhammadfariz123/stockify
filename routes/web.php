@@ -81,6 +81,10 @@ Route::prefix('admin')
         // Menambahkan rute untuk laporan transaksi
         Route::get('reports/transactions', [AdminController::class, 'showTransactionsReport'])->name('reports.transactions');
 
+        Route::get('reports/stock/pdf', [AdminController::class, 'exportStockReportPdf'])->name('reports.stock.pdf');
+
+
+
         // Menambahkan rute untuk stock opname
         Route::get('stockopname', [AdminController::class, 'indexStockOpname'])->name('stockopname.index');
 
@@ -94,8 +98,10 @@ Route::prefix('admin')
         // Resource untuk kategori → uri /admin/categories ; names admin.categories.*
         Route::resource('categories', CategoryController::class);
 
-        // Laporan
-        Route::get('reports', [AdminController::class, 'showReports'])->name('reports.index');
+        //    stock minimum
+        Route::get('/minimum-stock', [AdminController::class, 'minimumStock'])->name('minimum_stock.index');
+        Route::post('/minimum-stock/{product}', [AdminController::class, 'updateMinimumStock'])->name('minimum_stock.update');
+
     });
 
 

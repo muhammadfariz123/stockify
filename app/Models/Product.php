@@ -30,7 +30,7 @@ class Product extends Model
         'image',
         'category_id',
         'supplier_id',
-        'status'
+        'minimum_stock',
     ];
 
     // Aksesornya untuk harga beli (dalam rupiah)

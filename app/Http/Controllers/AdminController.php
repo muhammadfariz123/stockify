@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductAttribute;
@@ -18,28 +19,67 @@ class AdminController extends Controller
     // Dashboard
     public function dashboard()
     {
-        // Ambil data yang diperlukan untuk dashboard
-        $products = Product::all();
-        $incomingTransactions = Transaction::where('type', 'in')->count();
-        $outgoingTransactions = Transaction::where('type', 'out')->count();
-        // Ambil semua produk dengan nama dan stok
-        $products = Product::select('name', 'stock')->get();  // Ambil produk dan stoknya
-        $productsCount = Product::count(); // Hitung total produk
+        // Ambil data produk
+        $products = Product::all();  // Ambil semua produk dari database
+        $totalIncomingTransactions = 0;
+        $totalOutgoingTransactions = 0;
+        $lowStockCount = Product::whereColumn('stock', '<', 'minimum_stock')->count();
 
-        // Ambil aktivitas pengguna terbaru, misalnya pengguna yang login atau melakukan transaksi terbaru
-        $latestUsers = User::latest()->take(5)->get(); // Ambil 5 pengguna terbaru
+        // Hitung transaksi masuk dan keluar yang sudah dikonfirmasi
+        foreach ($products as $product) {
+            // Hanya ambil transaksi yang sudah dikonfirmasi (status 'confirmed')
+            $incomingTransactions = Transaction::where('product_id', $product->id)
+                ->where('type', 'in')
+                ->where('status', 'confirmed')  // Hanya transaksi yang sudah dikonfirmasi
+                ->count();  // Hitung jumlah transaksi masuk yang sudah dikonfirmasi
 
-        // ✅ Ambil log aktivitas terbaru (misalnya 10 terakhir)
+
+            $outgoingTransactions = Transaction::where('product_id', $product->id)
+                ->where('type', 'out')
+                ->where('status', 'confirmed')  // Hanya transaksi yang sudah dikonfirmasi
+                ->count();  // Hitung jumlah transaksi keluar yang sudah dikonfirmasi
+
+            // Tambahkan transaksi masuk dan keluar yang sudah dikonfirmasi
+            $totalIncomingTransactions += $incomingTransactions;
+            $totalOutgoingTransactions += $outgoingTransactions;
+        }
+
+        // Ambil jumlah total produk
+        $productsCount = Product::count();
+
+        // Ambil 5 pengguna terbaru
+        $latestUsers = User::latest()->take(5)->get();
+
+        // Ambil 10 aktivitas terbaru
         $recentActivities = ActivityLog::latest()->take(10)->get();
-        // Kirim data ke view dashboard
+
         return view('admin.dashboard', compact(
-            'incomingTransactions',
-            'outgoingTransactions',
             'products',
-            'latestUsers',
+            'totalIncomingTransactions',  // Kirim variabel transaksi masuk
+            'totalOutgoingTransactions',  // Kirim variabel transaksi keluar
             'productsCount',
+            'latestUsers',
             'recentActivities',
+            'lowStockCount',
         ));
+    }
+
+    public function minimumStock()
+    {
+        $products = Product::all();
+        return view('admin.minimum_stock.index', compact('products'));
+    }
+
+    public function updateMinimumStock(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'minimum_stock' => 'required|integer|min:0',
+        ]);
+
+        $product->minimum_stock = $validated['minimum_stock'];
+        $product->save();
+
+        return redirect()->route('admin.minimum_stock.index')->with('success', 'Stok minimum berhasil diperbarui.');
     }
     // Fungsi untuk menampilkan pengaturan aplikasi
     public function showSettings()
@@ -55,6 +95,15 @@ class AdminController extends Controller
         $products = Product::all();  // Misalnya, ambil semua produk yang ada di database
         return view('admin.reports.stock', compact('products'));  // Kirim data produk ke tampilan laporan stok
     }
+
+    public function exportStockReportPdf()
+    {
+        $products = Product::all();
+        $pdf = PDF::loadView('admin.reports.stock_pdf', compact('products'))->setPaper('a4', 'landscape');
+
+        return $pdf->download('laporan_stok_produk.pdf');
+    }
+
 
     // === Produk CRUD ===
     public function index()
@@ -233,7 +282,7 @@ class AdminController extends Controller
             // Jika tidak ada atribut yang dipilih, pastikan tidak ada atribut yang terkait dengan produk ini
             $product->attributes()->sync([]);
         }
-        
+
         return redirect()->route('admin.products.index')
             ->with('success', 'Produk berhasil diperbarui.');
     }
@@ -346,10 +395,5 @@ class AdminController extends Controller
         // Ambil data stock opname (misalnya, semua data dari tabel StockOpname)
         $stockOpnames = StockOpname::all();
         return view('admin.stockopname.index', compact('stockOpnames'));
-    }
-    // === Laporan ===
-    public function showReports()
-    {
-        return view('admin.reports.index');
     }
 }
