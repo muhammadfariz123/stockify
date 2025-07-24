@@ -81,8 +81,13 @@ Route::prefix('admin')
         // Menambahkan rute untuk laporan transaksi
         Route::get('reports/transactions', [AdminController::class, 'showTransactionsReport'])->name('reports.transactions');
 
-        Route::get('reports/stock/pdf', [AdminController::class, 'exportStockReportPdf'])->name('reports.stock.pdf');
 
+        // RUTE UNTUK EKSPOR PDF
+        Route::get('reports/stock/pdf', [AdminController::class, 'exportStockReportPdf'])->name('reports.stock.pdf');
+        // Route untuk mengekspor PDF transaksi
+        Route::get('reports/transactions/pdf', [AdminController::class, 'exportTransactionsPdf'])->name('reports.transactions.pdf');
+        // Route untuk mengekspor PDF laporan aktivitas
+        Route::get('reports/activity/pdf', [AdminController::class, 'exportActivityReportPdf'])->name('reports.activity.pdf');
 
 
         // Menambahkan rute untuk stock opname

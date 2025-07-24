@@ -98,6 +98,8 @@ class AdminController extends Controller
         return view('admin.reports.stock', compact('products'));  // Kirim data produk ke tampilan laporan stok
     }
 
+
+    // FUNGSI EKSPOR PDF
     public function exportStockReportPdf()
     {
         $products = Product::all();
@@ -106,6 +108,29 @@ class AdminController extends Controller
         return $pdf->download('laporan_stok_produk.pdf');
     }
 
+    public function exportTransactionsPdf()
+    {
+        // Ambil data transaksi yang akan diekspor
+        $transactions = Transaction::with('product')->get();
+
+        // Menghasilkan PDF dengan view yang sudah ada
+        $pdf = Pdf::loadView('admin.reports.transactions_pdf', compact('transactions'));
+
+        // Men-download PDF
+        return $pdf->download('laporan_transaksi.pdf');
+    }
+
+    public function exportActivityReportPdf()
+    {
+        // Ambil semua data aktivitas untuk laporan
+        $activities = ActivityLog::with('user')->get();  // Mengambil data aktivitas dengan relasi pengguna
+
+        // Buat PDF dengan menggunakan view yang ada
+        $pdf = Pdf::loadView('admin.reports.activity_pdf', compact('activities'));
+
+        // Kembalikan PDF untuk di-download
+        return $pdf->download('laporan_aktivitas.pdf');
+    }
 
     // === Produk CRUD ===
     public function index()
@@ -478,7 +503,11 @@ class AdminController extends Controller
     // Fungsi untuk menampilkan laporan aktivitas
     public function showActivityReport()
     {
-        $activities = ActivityLog::all(); // ✅ Gunakan ActivityLog, bukan Activity
+        // $activities = ActivityLog::all(); // ✅ Gunakan ActivityLog, bukan Activity
+        // Mengambil data aktivitas dengan pagination (10 data per halaman)
+        $activities = ActivityLog::with('user')->paginate(10);  // Menambahkan pagination
+
+        // Mengembalikan data ke view dengan compact
         return view('admin.reports.activity', compact('activities'));
     }
 

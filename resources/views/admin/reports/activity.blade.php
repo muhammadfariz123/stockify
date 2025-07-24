@@ -16,6 +16,18 @@
         </div>
     </div>
 
+        <!-- Export PDF Button -->
+    <div class="mb-6 text-right">
+        <a href="{{ route('admin.reports.activity.pdf') }}" 
+           class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Export PDF
+        </a>
+    </div>
+
+
     <!-- Filter Section (Optional) -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
         <div class="p-4 border-b border-gray-200">
@@ -151,6 +163,11 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+           <!-- Pagination -->
+        <div class="mt-4">
+            {{ $activities->links() }}
         </div>
 
         <!-- Empty State -->

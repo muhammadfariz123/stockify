@@ -36,26 +36,15 @@ class Product extends Model
     // Aksesornya untuk harga beli (dalam rupiah)
     public function getPurchasePriceAttribute($value)
     {
-        return $value / 100;  // Mengonversi harga beli dari sen ke rupiah
+        return $value;  // Mengonversi harga beli dari sen ke rupiah
     }
 
     // Aksesornya untuk harga jual (dalam rupiah)
     public function getSellingPriceAttribute($value)
     {
-        return $value / 100;  // Mengonversi harga jual dari sen ke rupiah
+        return $value;  // Mengonversi harga jual dari sen ke rupiah
     }
 
-    // Mutator untuk harga beli (dalam sen)
-    public function setPurchasePriceAttribute($value)
-    {
-        $this->attributes['purchase_price'] = $value * 100;
-    }
-
-    // Mutator untuk harga jual (dalam sen)
-    public function setSellingPriceAttribute($value)
-    {
-        $this->attributes['selling_price'] = $value * 100;
-    }
 
     // Definisikan relasi ke Category
     public function category()

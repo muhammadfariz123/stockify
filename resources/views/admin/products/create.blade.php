@@ -223,15 +223,21 @@
         document.getElementById('add-attribute').addEventListener('click', () => {
             const container = document.getElementById('attributes-container');
             const html = `
-                            <div class="flex gap-2 mt-2">
-                                <input type="text" name="attributes[${attrIndex}][name]" placeholder="Nama Atribut"
-                                    class="w-1/2 px-4 py-2 border border-gray-300 rounded" />
-                                <input type="text" name="attributes[${attrIndex}][value]" placeholder="Nilai"
-                                    class="w-1/2 px-4 py-2 border border-gray-300 rounded" />
-                            </div>
-                        `;
+                                    <div class="flex gap-2 mt-2">
+                                        <input type="text" name="attributes[${attrIndex}][name]" placeholder="Nama Atribut"
+                                            class="w-1/2 px-4 py-2 border border-gray-300 rounded" />
+                                        <input type="text" name="attributes[${attrIndex}][value]" placeholder="Nilai"
+                                            class="w-1/2 px-4 py-2 border border-gray-300 rounded" />
+                                    </div>
+                                `;
             container.insertAdjacentHTML('beforeend', html);
             attrIndex++;
+        });
+
+        // Script untuk format Rupiah (dengan titik pemisah ribuan)
+        document.getElementById('purchase_price').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            e.target.value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
         });
     </script>
 @endpush
