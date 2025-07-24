@@ -27,29 +27,6 @@
         </a>
     </div>
 
-    <!-- Filter Section (Optional - you can add this for better functionality) -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
-        <div class="p-4 border-b border-gray-200">
-            <div class="flex flex-wrap items-center gap-3">
-                <div class="flex items-center gap-2">
-                    <i data-feather="filter" class="w-4 h-4 text-gray-500"></i>
-                    <span class="text-sm font-medium text-gray-700">Filter</span>
-                </div>
-                <select class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option>Semua Tipe</option>
-                    <option>Masuk</option>
-                    <option>Keluar</option>
-                </select>
-                <select class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option>Semua Status</option>
-                    <option>Pending</option>
-                    <option>Confirmed</option>
-                </select>
-                <input type="date" class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-        </div>
-    </div>
-
     <!-- Table Section -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="overflow-x-auto">
