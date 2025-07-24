@@ -13,6 +13,8 @@ use App\Models\ActivityLog;
 use App\Models\Transaction; // Asumsi Anda memiliki model untuk transaksi
 use App\Models\User; // Asumsi Anda ingin menampilkan aktivitas pengguna terbaru
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminController extends Controller
 {
@@ -384,13 +386,20 @@ class AdminController extends Controller
             'transaction_date' => now(),
         ]);
 
-        // Tambahkan stok hanya jika status confirmed
         if ($transaction->status === 'confirmed') {
             $transaction->product->increment('stock', $transaction->quantity);
         }
 
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Tambah Transaksi Masuk',
+            'description' => 'Menambahkan transaksi masuk #' . $transaction->id,
+        ]);
+
         return redirect()->route('admin.transactions.in')->with('success', 'Transaksi masuk berhasil ditambahkan.');
     }
+
 
 
     // Tampilkan form edit pada halaman yang sama
@@ -416,11 +425,8 @@ class AdminController extends Controller
 
         $transaction = Transaction::findOrFail($id);
         $product = Product::findOrFail($request->product_id);
-
-        // Simpan status lama untuk pengecekan
         $previousStatus = $transaction->status;
 
-        // Update data transaksi
         $transaction->update([
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
@@ -428,13 +434,20 @@ class AdminController extends Controller
             'status' => $request->status,
         ]);
 
-        // Jika sebelumnya pending dan sekarang confirmed, maka tambahkan ke stok
         if ($previousStatus !== 'confirmed' && $request->status === 'confirmed') {
             $product->increment('stock', $request->quantity);
         }
 
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Edit Transaksi Masuk',
+            'description' => 'Memperbarui transaksi masuk #' . $transaction->id,
+        ]);
+
         return redirect()->route('admin.transactions.in')->with('success', 'Transaksi berhasil diperbarui.');
     }
+
 
 
 
@@ -443,6 +456,13 @@ class AdminController extends Controller
     {
         $transaction = Transaction::findOrFail($id);
         $transaction->delete();
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Hapus Transaksi Masuk',
+            'description' => 'Menghapus transaksi masuk #' . $transaction->id,
+        ]);
 
         return redirect()->route('admin.transactions.in')->with('success', 'Transaksi berhasil dihapus.');
     }
@@ -463,11 +483,106 @@ class AdminController extends Controller
     }
 
     // Fungsi untuk menampilkan transaksi keluar
+    // Tampilkan halaman transaksi keluar (form & tabel)
     public function showOutgoingTransactions()
     {
-        $transactionsOut = Transaction::where('type', 'out')->get(); // Menampilkan transaksi dengan tipe 'out'
-        return view('admin.transactions.out', compact('transactionsOut'));
+        $transactionsOut = Transaction::where('type', 'out')->with('product')->latest()->get();
+        $products = Product::all();
+        return view('admin.transactions.out', compact('transactionsOut', 'products'));
     }
+
+    // Simpan transaksi keluar baru
+    public function storeOutgoingTransaction(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|numeric|min:1',
+            'status' => 'required|in:pending,confirmed',
+        ]);
+
+        $transaction = Transaction::create([
+            'type' => 'out',
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'status' => $request->status,
+            'transaction_date' => now(),
+        ]);
+
+        if ($transaction->status === 'confirmed') {
+            $transaction->product->decrement('stock', $transaction->quantity);
+        }
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Tambah Transaksi Keluar',
+            'description' => 'Menambahkan transaksi keluar #' . $transaction->id,
+        ]);
+
+        return redirect()->route('admin.transactions.out')->with('success', 'Transaksi keluar berhasil ditambahkan.');
+    }
+
+
+    // Tampilkan form edit dalam halaman yang sama
+    public function editOutgoingTransaction($id)
+    {
+        $transactionsOut = Transaction::where('type', 'out')->with('product')->latest()->get();
+        $products = Product::all();
+        $editTransaction = Transaction::findOrFail($id);
+
+        return view('admin.transactions.out', compact('transactionsOut', 'products', 'editTransaction'));
+    }
+
+    // Update transaksi keluar
+    public function updateOutgoingTransaction(Request $request, $id)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|numeric|min:1',
+            'status' => 'required|in:pending,confirmed',
+        ]);
+
+        $transaction = Transaction::findOrFail($id);
+        $product = Product::findOrFail($request->product_id);
+        $previousStatus = $transaction->status;
+
+        $transaction->update([
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'status' => $request->status,
+        ]);
+
+        if ($previousStatus !== 'confirmed' && $request->status === 'confirmed') {
+            $product->decrement('stock', $request->quantity);
+        }
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Edit Transaksi Keluar',
+            'description' => 'Memperbarui transaksi keluar #' . $transaction->id,
+        ]);
+
+        return redirect()->route('admin.transactions.out')->with('success', 'Transaksi berhasil diperbarui.');
+    }
+
+
+    // Hapus transaksi keluar
+    public function deleteOutgoingTransaction($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'User',
+            'activity' => 'Hapus Transaksi Keluar',
+            'description' => 'Menghapus transaksi keluar #' . $transaction->id,
+        ]);
+
+        return redirect()->route('admin.transactions.out')->with('success', 'Transaksi berhasil dihapus.');
+    }
+
 
 
 

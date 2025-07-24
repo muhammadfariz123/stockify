@@ -89,7 +89,7 @@ Route::prefix('admin')
         Route::get('stockopname', [AdminController::class, 'indexStockOpname'])->name('stockopname.index');
 
         // Menambahkan rute untuk transaksi
-// Transaksi Masuk - Admin
+        // Transaksi Masuk - Admin
         Route::get('transactions/in', [AdminController::class, 'showIncomingTransactions'])->name('transactions.in');
         Route::post('transactions/in/store', [AdminController::class, 'storeIncomingTransaction'])->name('transactions.in.store');
         Route::get('transactions/in/edit/{id}', [AdminController::class, 'editIncomingTransaction'])->name('transactions.in.edit');
@@ -97,11 +97,13 @@ Route::prefix('admin')
         Route::delete('transactions/in/delete/{id}', [AdminController::class, 'deleteIncomingTransaction'])->name('transactions.in.delete');
 
 
-
-
-
-
+        // Transaksi Keluar
         Route::get('transactions/out', [AdminController::class, 'showOutgoingTransactions'])->name('transactions.out');
+        Route::post('transactions/out/store', [AdminController::class, 'storeOutgoingTransaction'])->name('transactions.out.store');
+        Route::get('transactions/out/edit/{id}', [AdminController::class, 'editOutgoingTransaction'])->name('transactions.out.edit');
+        Route::put('transactions/out/update/{id}', [AdminController::class, 'updateOutgoingTransaction'])->name('transactions.out.update');
+        Route::delete('transactions/out/delete/{id}', [AdminController::class, 'deleteOutgoingTransaction'])->name('transactions.out.delete');
+
 
         // Resource untuk supplier → uri /admin/suppliers ; names admin.suppliers.*
         Route::resource('suppliers', SupplierController::class);  // Tambahkan rute ini
