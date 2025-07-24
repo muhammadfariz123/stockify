@@ -355,11 +355,96 @@ class AdminController extends Controller
             ->with('success', 'Kategori berhasil dihapus.');
     }
 
-    // Fungsi untuk menampilkan transaksi masuk
-    public function showIncomingTransactions()
+    // Menampilkan halaman transaksi masuk + form tambah/edit
+    public function showIncomingTransactions(Request $request)
     {
-        $transactionsIn = Transaction::where('type', 'in')->get(); // Menampilkan transaksi dengan tipe 'in'
-        return view('admin.transactions.in', compact('transactionsIn'));
+        $transactionsIn = Transaction::where('type', 'in')->with('product')->latest()->get();
+        $products = Product::all();
+        $suppliers = Supplier::all();
+
+        return view('admin.transactions.in', compact('transactionsIn', 'products', 'suppliers'));
+    }
+
+    // Store transaksi masuk baru
+    public function storeIncomingTransaction(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|numeric|min:1',
+            'supplier_id' => 'required|exists:suppliers,id',
+            'status' => 'required|in:pending,confirmed,canceled',
+        ]);
+
+        $transaction = Transaction::create([
+            'type' => 'in',
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'supplier_id' => $request->supplier_id,
+            'status' => $request->status,
+            'transaction_date' => now(),
+        ]);
+
+        // Tambahkan stok hanya jika status confirmed
+        if ($transaction->status === 'confirmed') {
+            $transaction->product->increment('stock', $transaction->quantity);
+        }
+
+        return redirect()->route('admin.transactions.in')->with('success', 'Transaksi masuk berhasil ditambahkan.');
+    }
+
+
+    // Tampilkan form edit pada halaman yang sama
+    public function editIncomingTransaction($id)
+    {
+        $transactionsIn = Transaction::where('type', 'in')->with('product')->latest()->get();
+        $products = Product::all();
+        $suppliers = Supplier::all();
+        $editTransaction = Transaction::findOrFail($id);
+
+        return view('admin.transactions.in', compact('transactionsIn', 'products', 'suppliers', 'editTransaction'));
+    }
+
+    // Update data transaksi masuk
+    public function updateIncomingTransaction(Request $request, $id)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|numeric|min:1',
+            'supplier_id' => 'required|exists:suppliers,id',
+            'status' => 'required|in:pending,confirmed,canceled',
+        ]);
+
+        $transaction = Transaction::findOrFail($id);
+        $product = Product::findOrFail($request->product_id);
+
+        // Simpan status lama untuk pengecekan
+        $previousStatus = $transaction->status;
+
+        // Update data transaksi
+        $transaction->update([
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'supplier_id' => $request->supplier_id,
+            'status' => $request->status,
+        ]);
+
+        // Jika sebelumnya pending dan sekarang confirmed, maka tambahkan ke stok
+        if ($previousStatus !== 'confirmed' && $request->status === 'confirmed') {
+            $product->increment('stock', $request->quantity);
+        }
+
+        return redirect()->route('admin.transactions.in')->with('success', 'Transaksi berhasil diperbarui.');
+    }
+
+
+
+    // Hapus transaksi masuk
+    public function deleteIncomingTransaction($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+
+        return redirect()->route('admin.transactions.in')->with('success', 'Transaksi berhasil dihapus.');
     }
 
     // Fungsi untuk menampilkan laporan transaksi

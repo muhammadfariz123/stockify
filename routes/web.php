@@ -89,7 +89,18 @@ Route::prefix('admin')
         Route::get('stockopname', [AdminController::class, 'indexStockOpname'])->name('stockopname.index');
 
         // Menambahkan rute untuk transaksi
+// Transaksi Masuk - Admin
         Route::get('transactions/in', [AdminController::class, 'showIncomingTransactions'])->name('transactions.in');
+        Route::post('transactions/in/store', [AdminController::class, 'storeIncomingTransaction'])->name('transactions.in.store');
+        Route::get('transactions/in/edit/{id}', [AdminController::class, 'editIncomingTransaction'])->name('transactions.in.edit');
+        Route::put('transactions/in/update/{id}', [AdminController::class, 'updateIncomingTransaction'])->name('transactions.in.update');
+        Route::delete('transactions/in/delete/{id}', [AdminController::class, 'deleteIncomingTransaction'])->name('transactions.in.delete');
+
+
+
+
+
+
         Route::get('transactions/out', [AdminController::class, 'showOutgoingTransactions'])->name('transactions.out');
 
         // Resource untuk supplier → uri /admin/suppliers ; names admin.suppliers.*
