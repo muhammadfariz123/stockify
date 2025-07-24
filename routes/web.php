@@ -137,9 +137,15 @@ Route::prefix('manager')
         Route::resource('products', ProductManagerController::class);
 
 
-        // TRANSACTIONS
-        Route::get('transactions/in', [TransactionController::class, 'showIncomingForm'])->name('transactions.in');
+   // TRANSAKSI MASUK
+        Route::get('transactions/in', [TransactionController::class, 'in'])->name('transactions.in');
         Route::post('transactions/in', [TransactionController::class, 'storeIncoming'])->name('transactions.store.in');
+        Route::get('transactions/in/edit/{transaction}', [TransactionController::class, 'editIncoming'])->name('transactions.edit.in');
+        Route::put('transactions/in/update/{transaction}', [TransactionController::class, 'updateIncoming'])->name('transactions.update.in');
+        Route::delete('transactions/in/delete/{transaction}', [TransactionController::class, 'destroyIncoming'])->name('transactions.delete.in');
+
+
+
         Route::get('transactions/out', [TransactionController::class, 'showOutgoingForm'])->name('transactions.out');
         Route::post('transactions/out', [TransactionController::class, 'storeOutgoing'])->name('transactions.store.out');
 
