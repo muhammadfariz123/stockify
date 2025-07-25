@@ -240,7 +240,7 @@ Proyek ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE)
 </table>
 
 ### 🤝 **Get In Touch**
-📧 **Email:** muhammadfariz123@example.com  
+📧 **Email:** warungkombas@gmail.com  
 💼 **LinkedIn:** [Muhammad Fariz](https://linkedin.com/in/muhammadfariz123)
 
 </div>
