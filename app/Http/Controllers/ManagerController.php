@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
@@ -90,5 +91,46 @@ class ManagerController extends Controller
         $product->save();
 
         return redirect()->route('manager.minimum_stock.index')->with('success', 'Stok minimum berhasil diperbarui.');
+    }
+
+
+    // FUNGSI UNTUK MENGATUR LAPORAN 
+    public function showStockReport()
+    {
+        $products = Product::all();
+        return view('manager.reports.stock', compact('products'));
+    }
+
+    public function exportStockReportPdf()
+    {
+        $products = Product::all();
+        $pdf = Pdf::loadView('manager.reports.stock_pdf', compact('products'))->setPaper('a4', 'landscape');
+        return $pdf->download('laporan_stok_produk.pdf');
+    }
+
+    public function showTransactionsReport()
+    {
+        $transactions = Transaction::with('product')->get();
+        return view('manager.reports.transactions', compact('transactions'));
+    }
+
+    public function exportTransactionsPdf()
+    {
+        $transactions = Transaction::with('product')->get();
+        $pdf = Pdf::loadView('manager.reports.transactions_pdf', compact('transactions'));
+        return $pdf->download('laporan_transaksi.pdf');
+    }
+
+    public function showActivityReport()
+    {
+        $activities = ActivityLog::with('user')->paginate(10);
+        return view('manager.reports.activity', compact('activities'));
+    }
+
+    public function exportActivityReportPdf()
+    {
+        $activities = ActivityLog::with('user')->get();
+        $pdf = Pdf::loadView('manager.reports.activity_pdf', compact('activities'));
+        return $pdf->download('laporan_aktivitas.pdf');
     }
 }

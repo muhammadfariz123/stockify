@@ -8,7 +8,6 @@ use App\Http\Controllers\CategoryController; // Pastikan ini sudah diimport
 use App\Http\Controllers\StockOpnameController; // Pastikan ini sudah diimport
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\SupplierController; // Pastikan ini sudah diimport
-use App\Http\Controllers\ReportController;  // Import ReportController
 use App\Http\Controllers\TransactionController;  // Import ReportController
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
@@ -155,9 +154,7 @@ Route::prefix('manager')
         Route::get('stockopname', [StockOpnameController::class, 'index'])->name('stockopname.index');
         Route::post('stockopname', [StockOpnameController::class, 'store'])->name('stockopname.store');
 
-        // REPORTS
-        Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
-
+        // MINIMUM STOK
         Route::get('minimum-stock', [ManagerController::class, 'minimumStock'])->name('minimum_stock.index');
         Route::post('minimum-stock/{product}', [ManagerController::class, 'updateMinimumStock'])->name('minimum_stock.update');
 
@@ -166,12 +163,15 @@ Route::prefix('manager')
         Route::get('suppliers', [ManagerController::class, 'suppliers'])->name('suppliers.index');
 
 
-        // Menambahkan rute untuk laporan stok
-        Route::get('reports/stock', [ReportController::class, 'stockReport'])->name('reports.stock');
-        // Menambahkan rute untuk laporan transaksi
-        Route::get('reports/transactions', [ReportController::class, 'transactionReport'])->name('reports.transactions');
+        // Laporan View 
+        Route::get('reports/stock', [ManagerController::class, 'showStockReport'])->name('reports.stock');
+        Route::get('reports/transactions', [ManagerController::class, 'showTransactionsReport'])->name('reports.transactions');
+        Route::get('reports/activity', [ManagerController::class, 'showActivityReport'])->name('reports.activity');
 
-
+        // Export PDF
+        Route::get('reports/stock/pdf', [ManagerController::class, 'exportStockReportPdf'])->name('reports.stock.pdf');
+        Route::get('reports/transactions/pdf', [ManagerController::class, 'exportTransactionsPdf'])->name('reports.transactions.pdf');
+        Route::get('reports/activity/pdf', [ManagerController::class, 'exportActivityReportPdf'])->name('reports.activity.pdf');
 
     });
 
