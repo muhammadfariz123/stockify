@@ -158,6 +158,8 @@ Route::prefix('manager')
         // REPORTS
         Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
 
+        Route::get('minimum-stock', [ManagerController::class, 'minimumStock'])->name('minimum_stock.index');
+        Route::post('minimum-stock/{product}', [ManagerController::class, 'updateMinimumStock'])->name('minimum_stock.update');
 
 
         // Supplier Routes

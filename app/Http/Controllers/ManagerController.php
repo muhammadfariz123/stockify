@@ -36,7 +36,7 @@ class ManagerController extends Controller
         return view('manager.stock', compact('transactions'));
     }
 
-        // Menampilkan daftar produk
+    // Menampilkan daftar produk
     public function products()
     {
         $products = Product::with('category', 'supplier')->get();
@@ -71,5 +71,24 @@ class ManagerController extends Controller
     {
         $suppliers = Supplier::all();
         return view('manager.suppliers.index', compact('suppliers'));
+    }
+
+    // FUNGSI STOCK MINIMUM
+    public function minimumStock()
+    {
+        $products = Product::all();
+        return view('manager.minimum_stock.index', compact('products'));
+    }
+
+    public function updateMinimumStock(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'minimum_stock' => 'required|integer|min:0',
+        ]);
+
+        $product->minimum_stock = $validated['minimum_stock'];
+        $product->save();
+
+        return redirect()->route('manager.minimum_stock.index')->with('success', 'Stok minimum berhasil diperbarui.');
     }
 }

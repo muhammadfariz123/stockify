@@ -114,7 +114,8 @@
             </div>
 
             <!-- Logo Section -->
-            <div class="p-4 sm:p-6 border-b border-emerald-600/30 flex justify-between items-center relative flex-shrink-0">
+            <div
+                class="p-4 sm:p-6 border-b border-emerald-600/30 flex justify-between items-center relative flex-shrink-0">
                 <div class="flex items-center space-x-3 sm:space-x-4">
                     <div
                         class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-white to-emerald-50 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
@@ -167,7 +168,8 @@
                     <div id="produkSubmenu" class="ml-4 sm:ml-6 space-y-2 hidden">
                         <a href="{{ route('manager.products.index') }}"
                             class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
-                            <div class="w-2 h-2 bg-emerald-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            <div
+                                class="w-2 h-2 bg-emerald-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
                             </div>
                             <span class="text-sm font-medium truncate">Daftar Produk</span>
                         </a>
@@ -193,22 +195,33 @@
                     <div id="stokSubmenu" class="ml-4 sm:ml-6 space-y-2 hidden">
                         <a href="{{ route('manager.transactions.in') }}"
                             class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
-                            <div class="w-2 h-2 bg-green-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            <div
+                                class="w-2 h-2 bg-green-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
                             </div>
                             <span class="text-sm font-medium truncate">Barang Masuk</span>
                         </a>
                         <a href="{{ route('manager.transactions.out') }}"
                             class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
-                            <div class="w-2 h-2 bg-red-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            <div
+                                class="w-2 h-2 bg-red-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
                             </div>
                             <span class="text-sm font-medium truncate">Barang Keluar</span>
                         </a>
                         <a href="{{ route('manager.stockopname.index') }}"
                             class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
-                            <div class="w-2 h-2 bg-yellow-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            <div
+                                class="w-2 h-2 bg-yellow-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
                             </div>
                             <span class="text-sm font-medium truncate">Stock Opname</span>
                         </a>
+                        <a href="{{ route('manager.minimum_stock.index') }}"
+                            class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
+                            <div
+                                class="w-2 h-2 bg-amber-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            </div>
+                            <span class="text-sm font-medium truncate">Stok Minimum</span>
+                        </a>
+
                     </div>
                 </div>
 
@@ -244,13 +257,15 @@
                     <div id="laporanSubmenu" class="ml-4 sm:ml-6 space-y-2 hidden">
                         <a href="{{ route('manager.reports.stock') }}"
                             class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
-                            <div class="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            <div
+                                class="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
                             </div>
                             <span class="text-sm font-medium truncate">Laporan Stok</span>
                         </a>
                         <a href="{{ route('manager.reports.transactions') }}"
                             class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
-                            <div class="w-2 h-2 bg-purple-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            <div
+                                class="w-2 h-2 bg-purple-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
                             </div>
                             <span class="text-sm font-medium truncate">Laporan Transaksi</span>
                         </a>
@@ -261,7 +276,8 @@
             <!-- User Profile & Logout Section -->
             <div
                 class="p-3 sm:p-4 border-t border-emerald-600/30 bg-gradient-to-r from-emerald-800/50 to-emerald-900/50 backdrop-blur-sm flex-shrink-0">
-                <div class="flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4 py-3 sm:py-4 mb-3 sm:mb-4 bg-white/5 rounded-xl backdrop-blur-sm">
+                <div
+                    class="flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4 py-3 sm:py-4 mb-3 sm:mb-4 bg-white/5 rounded-xl backdrop-blur-sm">
                     <div
                         class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
                         <i class="fas fa-user text-white text-sm sm:text-lg"></i>
@@ -410,6 +426,7 @@
 
         /* Hover Effects - Reduced for mobile */
         @media (hover: hover) {
+
             a:hover,
             button:hover {
                 transform: scale(1.05);
@@ -461,6 +478,7 @@
             .text-xl {
                 font-size: 1.125rem;
             }
+
             .text-2xl {
                 font-size: 1.25rem;
             }
