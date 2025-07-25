@@ -137,17 +137,19 @@ Route::prefix('manager')
         Route::resource('products', ProductManagerController::class);
 
 
-   // TRANSAKSI MASUK
+        // TRANSAKSI MASUK
         Route::get('transactions/in', [TransactionController::class, 'in'])->name('transactions.in');
-        Route::post('transactions/in', [TransactionController::class, 'storeIncoming'])->name('transactions.store.in');
-        Route::get('transactions/in/edit/{transaction}', [TransactionController::class, 'editIncoming'])->name('transactions.edit.in');
-        Route::put('transactions/in/update/{transaction}', [TransactionController::class, 'updateIncoming'])->name('transactions.update.in');
-        Route::delete('transactions/in/delete/{transaction}', [TransactionController::class, 'destroyIncoming'])->name('transactions.delete.in');
+        Route::post('transactions/in/store', [TransactionController::class, 'storeOrUpdateIncoming'])->name('transactions.store.in');
+        Route::get('transactions/in/edit/{id}', [TransactionController::class, 'editIncoming'])->name('transactions.edit.in');
+        Route::delete('transactions/in/delete/{id}', [TransactionController::class, 'destroyIncoming'])->name('transactions.delete.in');
+
+        // TRANSAKSI KELUAR
+        Route::get('transactions/out', [TransactionController::class, 'showOutgoingTransactions'])->name('transactions.out');
+        Route::post('transactions/out/store', [TransactionController::class, 'storeOrUpdateOutgoingTransaction'])->name('transactions.store.out');
+        Route::get('transactions/out/edit/{id}', [TransactionController::class, 'editOutgoingTransaction'])->name('transactions.edit.out');
+        Route::delete('transactions/out/delete/{id}', [TransactionController::class, 'deleteOutgoingTransaction'])->name('transactions.delete.out');
 
 
-
-        Route::get('transactions/out', [TransactionController::class, 'showOutgoingForm'])->name('transactions.out');
-        Route::post('transactions/out', [TransactionController::class, 'storeOutgoing'])->name('transactions.store.out');
 
         // STOCKOPNAME
         Route::get('stockopname', [StockOpnameController::class, 'index'])->name('stockopname.index');

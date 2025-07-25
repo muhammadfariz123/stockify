@@ -10,151 +10,185 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-
-    // ==========TRANSAKSI MASUK=========
-
-    // Menampilkan form untuk barang masuk
-    public function showIncomingForm()
-    {
-        $products = Product::all();  // Ambil semua produk
-        $suppliers = Supplier::all();  // Ambil semua supplier
-        return view('manager.transactions.in', compact('products', 'suppliers'));
-    }
-
-    // Menampilkan transaksi masuk
+    // TRANSAKSI MASUK
+    // Tampilkan semua transaksi masuk
     public function in()
     {
-        // Ambil data transaksi masuk
-        $transactionsIn = Transaction::where('type', 'in')->get();  // Ambil transaksi yang tipe 'in'
-
-        // Ambil data produk dan supplier untuk form input
+        $transactionsIn = Transaction::where('type', 'in')->with('product')->latest()->get();
         $products = Product::all();
         $suppliers = Supplier::all();
 
-        // Kirim data transaksi, produk, dan supplier ke view
         return view('manager.transactions.in', compact('transactionsIn', 'products', 'suppliers'));
     }
 
-    // Menyimpan transaksi barang masuk
-    public function storeIncoming(Request $request)
+    // Simpan transaksi masuk baru atau update jika edit
+    public function storeOrUpdateIncoming(Request $request)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|numeric|min:1',
             'supplier_id' => 'required|exists:suppliers,id',
+            'status' => 'required|in:pending,confirmed',
         ]);
 
-        // Simpan transaksi masuk dengan status 'pending'
-        $transaction = Transaction::create([
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-            'supplier_id' => $request->supplier_id,
-            'type' => 'in',
-            'status' => 'pending',  // Status 'pending' hingga dikonfirmasi
-        ]);
+        if ($request->filled('id')) {
+            $transaction = Transaction::findOrFail($request->id);
+            $previousStatus = $transaction->status;
 
-        // ✅ Logging aktivitas transaksi masuk
+            $transaction->update([
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'supplier_id' => $request->supplier_id,
+                'status' => $request->status,
+            ]);
+
+            if ($previousStatus !== 'confirmed' && $request->status === 'confirmed') {
+                $transaction->product->increment('stock', $request->quantity);
+            }
+
+            $activity = 'Edit Transaksi Masuk';
+        } else {
+            $transaction = Transaction::create([
+                'type' => 'in',
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'supplier_id' => $request->supplier_id,
+                'status' => $request->status,
+                'transaction_date' => now(),
+            ]);
+
+            if ($request->status === 'confirmed') {
+                $transaction->product->increment('stock', $request->quantity);
+            }
+
+            $activity = 'Tambah Transaksi Masuk';
+        }
+
         ActivityLog::create([
             'user_id' => Auth::id(),
             'role' => Auth::user()->role ?? 'Manager',
-            'activity' => 'Barang Masuk',
-            'description' => 'Barang masuk: ' . $request->quantity . ' unit ke produk "' . $transaction->product->name . '". Menunggu konfirmasi dari staff.',
+            'activity' => $activity,
+            'description' => $activity . ' #' . $transaction->id,
         ]);
 
-        return redirect()->route('manager.transactions.in')->with('success', 'Barang berhasil ditambahkan dan menunggu konfirmasi.');
+        return redirect()->route('manager.transactions.in')->with('success', 'Transaksi berhasil disimpan.');
     }
 
-    // Mengedit transaksi masuk
-    public function editIncoming(Transaction $transaction)
+    // Isi data form edit
+    public function editIncoming($id)
     {
+        $transactionsIn = Transaction::where('type', 'in')->with('product')->latest()->get();
         $products = Product::all();
         $suppliers = Supplier::all();
-        return view('manager.transactions.in', compact('transaction', 'products', 'suppliers'));
+        $editTransaction = Transaction::findOrFail($id);
+
+        return view('manager.transactions.in', compact('transactionsIn', 'products', 'suppliers', 'editTransaction'));
     }
 
-    // Mengupdate transaksi masuk
-    public function updateIncoming(Request $request, Transaction $transaction)
+    // Hapus transaksi masuk
+    public function destroyIncoming($id)
     {
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|numeric|min:1',
-            'supplier_id' => 'required|exists:suppliers,id',
-        ]);
-
-        $transaction->update([
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-            'supplier_id' => $request->supplier_id,
-        ]);
-
-        // ✅ Logging aktivitas update transaksi masuk
-        ActivityLog::create([
-            'user_id' => Auth::id(),
-            'role' => Auth::user()->role ?? 'Manager',
-            'activity' => 'Update Barang Masuk',
-            'description' => 'Transaksi barang masuk diperbarui: ' . $request->quantity . ' unit produk "' . $transaction->product->name . '".',
-        ]);
-
-        return redirect()->route('manager.transactions.in')->with('success', 'Transaksi berhasil diperbarui.');
-    }
-
-    // Menghapus transaksi masuk
-    public function destroyIncoming(Transaction $transaction)
-    {
+        $transaction = Transaction::findOrFail($id);
         $transaction->delete();
 
-        // ✅ Logging aktivitas penghapusan transaksi masuk
         ActivityLog::create([
             'user_id' => Auth::id(),
             'role' => Auth::user()->role ?? 'Manager',
-            'activity' => 'Hapus Barang Masuk',
-            'description' => 'Transaksi barang masuk dihapus: ' . $transaction->quantity . ' unit produk "' . $transaction->product->name . '".',
+            'activity' => 'Hapus Transaksi Masuk',
+            'description' => 'Menghapus transaksi masuk #' . $transaction->id,
         ]);
 
         return redirect()->route('manager.transactions.in')->with('success', 'Transaksi berhasil dihapus.');
     }
 
-
-
-    
     // ==========TRANSAKSI KELUAR=========
-    public function showOutgoingForm()
+    // Tampilkan semua transaksi keluar + form input/edit
+    public function showOutgoingTransactions()
     {
-        $products = Product::all();  // Ambil semua produk
-        return view('manager.transactions.out', compact('products'));
+        $transactionsOut = Transaction::where('type', 'out')->with('product')->latest()->get();
+        $products = Product::all();
+        $suppliers = Supplier::all();
+
+        return view('manager.transactions.out', compact('transactionsOut', 'products', 'suppliers'));
     }
 
-    // Menampilkan transaksi keluar
-    public function out()
-    {
-        $transactions = Transaction::where('type', 'out')->get();  // Filter transaksi keluar
-        return view('manager.transactions.out', compact('transactions'));
-    }
-
-    // Menyimpan transaksi barang keluar
-    public function storeOutgoing(Request $request)
+    // Simpan transaksi baru atau update jika edit
+    public function storeOrUpdateOutgoingTransaction(Request $request)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|numeric|min:1',
+            'status' => 'required|in:pending,confirmed',
+            'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
-        // Catat transaksi keluar dengan status 'pending'
-        $transaction = Transaction::create([
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-            'type' => 'out',
-            'status' => 'pending',  // Status 'pending' sampai dikonfirmasi oleh staff
-        ]);
+        if ($request->filled('id')) {
+            $transaction = Transaction::findOrFail($request->id);
+            $previousStatus = $transaction->status;
 
-        // ✅ Logging aktivitas transaksi keluar
+            $transaction->update([
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'status' => $request->status,
+                'supplier_id' => $request->supplier_id,
+            ]);
+
+            if ($previousStatus !== 'confirmed' && $request->status === 'confirmed') {
+                $transaction->product->decrement('stock', $request->quantity);
+            }
+
+            $activity = 'Edit Transaksi Keluar';
+        } else {
+            $transaction = Transaction::create([
+                'type' => 'out',
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'status' => $request->status,
+                'supplier_id' => $request->supplier_id,
+                'transaction_date' => now(),
+            ]);
+
+            if ($request->status === 'confirmed') {
+                $transaction->product->decrement('stock', $request->quantity);
+            }
+
+            $activity = 'Tambah Transaksi Keluar';
+        }
+
         ActivityLog::create([
             'user_id' => Auth::id(),
             'role' => Auth::user()->role ?? 'Manager',
-            'activity' => 'Barang Keluar',
-            'description' => 'Barang keluar: ' . $request->quantity . ' unit dari produk "' . $transaction->product->name . '". Menunggu konfirmasi dari staff.',
+            'activity' => $activity,
+            'description' => $activity . ' #' . $transaction->id,
         ]);
 
-        return redirect()->route('manager.transactions.out')->with('success', 'Barang berhasil ditambahkan dan menunggu konfirmasi.');
+        return redirect()->route('manager.transactions.out')->with('success', 'Transaksi berhasil disimpan.');
+    }
+
+    // Isi data untuk form edit
+    public function editOutgoingTransaction($id)
+    {
+        $transactionsOut = Transaction::where('type', 'out')->with('product')->latest()->get();
+        $products = Product::all();
+        $suppliers = Supplier::all();
+        $editTransaction = Transaction::findOrFail($id);
+
+        return view('manager.transactions.out', compact('transactionsOut', 'products', 'suppliers', 'editTransaction'));
+    }
+
+    // Hapus transaksi
+    public function deleteOutgoingTransaction($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+
+        ActivityLog::create([
+            'user_id' => Auth::id(),
+            'role' => Auth::user()->role ?? 'Manager',
+            'activity' => 'Hapus Transaksi Keluar',
+            'description' => 'Menghapus transaksi keluar #' . $transaction->id,
+        ]);
+
+        return redirect()->route('manager.transactions.out')->with('success', 'Transaksi berhasil dihapus.');
     }
 }
