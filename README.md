@@ -173,16 +173,8 @@ stockify/
 ## 📸 Screenshots
 
 <div align="center">
-    
-## Dashboard Admin
-<img width="1365" height="629" alt="Image" src="https://github.com/user-attachments/assets/72c0fa7f-956e-4698-856d-4bdcea5e607f" />
-
-## Dashboard Manager
-<img width="1365" height="630" alt="Image" src="https://github.com/user-attachments/assets/29eb11f9-93ec-486b-8f83-4d76869beb5c" />
-
-
-## Dashboard Staff
-<img width="1365" height="626" alt="Image" src="https://github.com/user-attachments/assets/bce66497-95ee-469e-8c0c-07af77456223" />
+  <img src="https://via.placeholder.com/800x400/0066cc/ffffff?text=Dashboard+Overview" alt="Dashboard" width="45%">
+  <img src="https://via.placeholder.com/800x400/28a745/ffffff?text=Inventory+Management" alt="Inventory" width="45%">
 </div>
 
 ---
@@ -211,16 +203,37 @@ Proyek ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE)
 
 ---
 
-## 👤 Author & Contact
+## 👥 Development Team
 
 <div align="center">
-  <img src="https://github.com/muhammadfariz123.png" width="100" style="border-radius: 50%;" alt="Muhammad Fariz">
   
-  **Muhammad Fariz**
-  
-  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/muhammadfariz123)
-  [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:muhammadfariz123@example.com)
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/muhammadfariz123)
+### 🚀 **Team Stockify**
+
+<table>
+<tr>
+<td align="center">
+<img src="https://github.com/muhammadfariz123.png" width="120" style="border-radius: 50%;" alt="Muhammad Fariz Nur Hidayat"><br>
+<sub><b>Muhammad Fariz Nur Hidayat</b></sub><br>
+<sub>🔧 Fullstack Developer</sub><br><br>
+<a href="https://github.com/muhammadfariz123">
+<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</a>
+</td>
+<td align="center">
+<img src="https://github.com/XeontNexus.png" width="120" style="border-radius: 50%;" alt="Abdul Roni"><br>
+<sub><b>Abdul Roni</b></sub><br>
+<sub>🎨 Frontend Developer</sub><br><br>
+<a href="https://github.com/XeontNexus">
+<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</a>
+</td>
+</tr>
+</table>
+
+### 🤝 **Get In Touch**
+📧 **Email:** muhammadfariz123@example.com  
+💼 **LinkedIn:** [Muhammad Fariz](https://linkedin.com/in/muhammadfariz123)
+
 </div>
 
 ---
