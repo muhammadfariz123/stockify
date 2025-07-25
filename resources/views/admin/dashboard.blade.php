@@ -28,93 +28,104 @@
 
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
             <!-- Products Card -->
-            <div
-                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-blue-300/50 hover:translate-y-2">
+            <a href="{{ route('admin.products.index') }}">
                 <div
-                    class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-2xl shadow-lg">
-                            <i class="fas fa-boxes text-white text-2xl"></i>
+                    class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-blue-300/50 hover:translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-2xl shadow-lg">
+                                <i class="fas fa-boxes text-white text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $productsCount }}</p>
+                                <p class="text-sm text-gray-500 uppercase tracking-wider">Produk</p>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $productsCount }}</p>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider">Produk</p>
+                        <div class="border-t border-gray-100 pt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Total Produk</h3>
                         </div>
                     </div>
-                    <div class="border-t border-gray-100 pt-4">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Total Produk</h3>
-                    </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Incoming Transactions -->
-            <div
-                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-green-300/50 hover:translate-y-2">
+            <a href="{{ route('admin.transactions.in') }}">
                 <div
-                    class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl shadow-lg">
-                            <i class="fas fa-arrow-down text-white text-2xl"></i>
+                    class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-green-300/50 hover:translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl shadow-lg">
+                                <i class="fas fa-arrow-down text-white text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $totalIncomingTransactions }}</p>
+                                <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi Masuk</p>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $totalIncomingTransactions }}</p>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi Masuk</p>
+                        <div class="border-t border-gray-100 pt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Transaksi Masuk</h3>
                         </div>
                     </div>
-                    <div class="border-t border-gray-100 pt-4">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Transaksi Masuk</h3>
-                    </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Outgoing Transactions -->
-            <div
-                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-red-300/50 hover:translate-y-2">
+            <a href="{{ route('admin.transactions.out') }}">
                 <div
-                    class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-2xl shadow-lg">
-                            <i class="fas fa-arrow-up text-white text-2xl"></i>
+                    class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-red-300/50 hover:translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-2xl shadow-lg">
+                                <i class="fas fa-arrow-up text-white text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $totalOutgoingTransactions }}</p>
+                                <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi Keluar</p>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $totalOutgoingTransactions }}</p>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider">Transaksi Keluar</p>
+                        <div class="border-t border-gray-100 pt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Transaksi Keluar</h3>
                         </div>
                     </div>
-                    <div class="border-t border-gray-100 pt-4">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Transaksi Keluar</h3>
-                    </div>
                 </div>
-            </div>
+            </a>
+
             <!-- Low Stock Warning Card -->
-            <div
-                class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-yellow-300/50 hover:translate-y-2">
+            <a href="{{ route('admin.minimum_stock.index') }}">
                 <div
-                    class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-amber-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                </div>
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="bg-gradient-to-br from-yellow-400 to-amber-500 p-4 rounded-2xl shadow-lg">
-                            <i class="fas fa-triangle-exclamation text-white text-2xl"></i>
+                    class="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/50 hover:border-yellow-300/50 hover:translate-y-2">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-amber-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="bg-gradient-to-br from-yellow-400 to-amber-500 p-4 rounded-2xl shadow-lg">
+                                <i class="fas fa-triangle-exclamation text-white text-2xl"></i>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $lowStockCount }}</p>
+                                <p class="text-sm text-gray-500 uppercase tracking-wider">Stok Rendah</p>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <p class="text-4xl font-extrabold text-gray-800 mb-1">{{ $lowStockCount }}</p>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider">Stok Rendah</p>
+                        <div class="border-t border-gray-100 pt-4">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Produk Di Bawah Minimum</h3>
                         </div>
                     </div>
-                    <div class="border-t border-gray-100 pt-4">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Produk Di Bawah Minimum</h3>
-                    </div>
                 </div>
-            </div>
+            </a>
         </div>
+
 
         <!-- Grafik Stok Barang -->
         <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg mb-8 border border-white/50">
