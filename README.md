@@ -173,8 +173,16 @@ stockify/
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x400/0066cc/ffffff?text=Dashboard+Overview" alt="Dashboard" width="45%">
-  <img src="https://via.placeholder.com/800x400/28a745/ffffff?text=Inventory+Management" alt="Inventory" width="45%">
+    
+## Dashboard Admin
+<img width="1365" height="629" alt="Image" src="https://github.com/user-attachments/assets/72c0fa7f-956e-4698-856d-4bdcea5e607f" />
+
+## Dashboard Manager
+<img width="1365" height="630" alt="Image" src="https://github.com/user-attachments/assets/29eb11f9-93ec-486b-8f83-4d76869beb5c" />
+
+
+## Dashboard Staff
+<img width="1365" height="626" alt="Image" src="https://github.com/user-attachments/assets/bce66497-95ee-469e-8c0c-07af77456223" />
 </div>
 
 ---
