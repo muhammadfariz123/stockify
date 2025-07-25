@@ -54,7 +54,6 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-        Route::resource('attributes', ProductAttributeController::class);
         // Rute logout
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
         // USERS
@@ -64,6 +63,12 @@ Route::prefix('admin')
         Route::get('users/{user}/edit', [AdminController::class, 'editUser'])->name('users.edit');
         Route::put('users/{user}', [AdminController::class, 'updateUser'])->name('users.update');
         Route::delete('users/{user}', [AdminController::class, 'destroyUser'])->name('users.destroy');
+        Route::resource('attributes', ProductAttributeController::class);
+        // Resource untuk kategori → uri /admin/categories ; names admin.categories.*
+        Route::resource('categories', CategoryController::class);
+
+
+
 
         // Resource untuk produk → uri /admin/products ; names admin.products.*
         Route::resource('products', AdminController::class);
@@ -112,8 +117,6 @@ Route::prefix('admin')
         // Resource untuk supplier → uri /admin/suppliers ; names admin.suppliers.*
         Route::resource('suppliers', SupplierController::class);  // Tambahkan rute ini
     
-        // Resource untuk kategori → uri /admin/categories ; names admin.categories.*
-        Route::resource('categories', CategoryController::class);
 
         //    stock minimum
         Route::get('/minimum-stock', [AdminController::class, 'minimumStock'])->name('minimum_stock.index');
@@ -134,6 +137,22 @@ Route::prefix('manager')
 
         // PRODUCTS
         Route::resource('products', ProductManagerController::class);
+
+        // Kategori
+        Route::get('categories', [ManagerController::class, 'categoriesIndex'])->name('categories.index');
+        Route::get('categories/create', [ManagerController::class, 'categoriesCreate'])->name('categories.create');
+        Route::post('categories', [ManagerController::class, 'categoriesStore'])->name('categories.store');
+        Route::get('categories/{category}/edit', [ManagerController::class, 'categoriesEdit'])->name('categories.edit');
+        Route::put('categories/{category}', [ManagerController::class, 'categoriesUpdate'])->name('categories.update');
+        Route::delete('categories/{category}', [ManagerController::class, 'categoriesDestroy'])->name('categories.destroy');
+
+        // Atribut Produk
+        Route::get('attributes', [ManagerController::class, 'attributesIndex'])->name('attributes.index');
+        Route::get('attributes/create', [ManagerController::class, 'attributesCreate'])->name('attributes.create');
+        Route::post('attributes', [ManagerController::class, 'attributesStore'])->name('attributes.store');
+        Route::get('attributes/{attribute}/edit', [ManagerController::class, 'attributesEdit'])->name('attributes.edit');
+        Route::put('attributes/{attribute}', [ManagerController::class, 'attributesUpdate'])->name('attributes.update');
+        Route::delete('attributes/{attribute}', [ManagerController::class, 'attributesDestroy'])->name('attributes.destroy');
 
 
         // TRANSAKSI MASUK

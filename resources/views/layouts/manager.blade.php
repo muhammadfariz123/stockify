@@ -173,6 +173,20 @@
                             </div>
                             <span class="text-sm font-medium truncate">Daftar Produk</span>
                         </a>
+                        <a href="{{ route('manager.categories.index') }}"
+                            class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
+                            <div
+                                class="w-2 h-2 bg-emerald-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            </div>
+                            <span class="text-sm font-medium truncate">Kategori Produk</span>
+                        </a>
+                        <a href="{{ route('manager.attributes.index') }}"
+                            class="flex items-center space-x-3 py-2 sm:py-3 px-3 sm:px-4 text-emerald-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 ease-in-out group touch-manipulation">
+                            <div
+                                class="w-2 h-2 bg-emerald-400 rounded-full group-hover:scale-150 transition-transform flex-shrink-0">
+                            </div>
+                            <span class="text-sm font-medium truncate">Atribut Produk</span>
+                        </a>
                     </div>
                 </div>
 

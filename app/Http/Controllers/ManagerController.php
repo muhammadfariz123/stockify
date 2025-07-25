@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Transaction;
+use App\Models\ProductAttribute;
 use App\Models\ActivityLog; // ✅ Tambahkan ini
 use Illuminate\Support\Facades\Auth; // ✅ Tambahkan ini
 use Illuminate\Http\Request;
@@ -133,4 +134,87 @@ class ManagerController extends Controller
         $pdf = Pdf::loadView('manager.reports.activity_pdf', compact('activities'));
         return $pdf->download('laporan_aktivitas.pdf');
     }
+
+
+    // === Kategori ===
+    public function categoriesIndex()
+    {
+        $categories = Category::all();
+        return view('manager.categories.index', compact('categories'));
+    }
+
+    public function categoriesCreate()
+    {
+        return view('manager.categories.create');
+    }
+
+    public function categoriesStore(Request $request)
+    {
+        $request->validate(['name' => 'required|string|max:255']);
+        Category::create($request->only('name'));
+        return redirect()->route('manager.categories.index')->with('success', 'Kategori ditambahkan.');
+    }
+
+    public function categoriesEdit(Category $category)
+    {
+        return view('manager.categories.edit', compact('category'));
+    }
+
+    public function categoriesUpdate(Request $request, Category $category)
+    {
+        $request->validate(['name' => 'required|string|max:255']);
+        $category->update($request->only('name'));
+        return redirect()->route('manager.categories.index')->with('success', 'Kategori diperbarui.');
+    }
+
+    public function categoriesDestroy(Category $category)
+    {
+        $category->delete();
+        return redirect()->route('manager.categories.index')->with('success', 'Kategori dihapus.');
+    }
+
+    // === Atribut Produk ===
+    public function attributesIndex()
+    {
+        $attributes = ProductAttribute::latest()->paginate(10);
+        return view('manager.attributes.index', compact('attributes'));
+    }
+
+    public function attributesCreate()
+    {
+        return view('manager.attributes.create');
+    }
+
+    public function attributesStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'value' => 'required|string|max:255',
+        ]);
+        ProductAttribute::create($request->only('name', 'value'));
+        return redirect()->route('manager.attributes.index')->with('success', 'Atribut ditambahkan.');
+    }
+
+    public function attributesEdit(ProductAttribute $attribute)
+    {
+        return view('manager.attributes.edit', compact('attribute'));
+    }
+
+    public function attributesUpdate(Request $request, ProductAttribute $attribute)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'value' => 'required|string|max:255',
+        ]);
+        $attribute->update($request->only('name', 'value'));
+        return redirect()->route('manager.attributes.index')->with('success', 'Atribut diperbarui.');
+    }
+
+    public function attributesDestroy(ProductAttribute $attribute)
+    {
+        $attribute->delete();
+        return redirect()->route('manager.attributes.index')->with('success', 'Atribut dihapus.');
+    }
+
+
 }
